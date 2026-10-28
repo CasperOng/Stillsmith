@@ -1187,12 +1187,14 @@ a:hover {
     display: none;
   }
 
-  .nav__cta {
-    margin-left: auto;
+  .nav__cta,
+  .nav__github {
+    display: none;
   }
 
   .nav__toggle {
     display: flex;
+    margin-left: auto;
   }
 
   .frames {

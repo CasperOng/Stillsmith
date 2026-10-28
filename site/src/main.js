@@ -162,7 +162,7 @@ const navMenu = document.getElementById("navMenu")
 const navToggle = nav?.querySelector(".nav__toggle")
 const navLinks = [...(nav?.querySelectorAll(".nav__links a") ?? [])]
 const lightSections = [...document.querySelectorAll('[data-surface="light"]')]
-const navSections = ["screens", "details", "install"]
+const navSections = ["screens", "details", "credit"]
   .map((id) => document.getElementById(id))
   .filter(Boolean)
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
