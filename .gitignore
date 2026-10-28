@@ -242,3 +242,7 @@ Payload/
 SHARE_EXTENSION_SETUP.md
 IMPLEMENTATION_SUMMARY.md
 CLI_CONFIGURATION_COMPLETE.md
+
+# Website
+site/node_modules/
+site/dist/

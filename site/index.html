@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stillsmith — pull the exact frame out of any video</title>
+  <meta name="description" content="Mark frames while a video plays. Stillsmith saves each one to Photos at the video's own resolution. iOS 17+, iPhone and iPad." />
+  <meta name="theme-color" content="#08090A" />
+  <link rel="icon" href="/apple-touch-icon.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Stillsmith — pull the exact frame out of any video" />
+  <meta property="og:description" content="Mark frames while a video plays. Stillsmith saves each one to Photos at the video's own resolution." />
+  <meta property="og:image" content="/apple-touch-icon.png" />
+  <meta property="og:url" content="https://stillsmith.is-my.app/" />
+  <link rel="alternate icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a class="nav__mark" href="#top" aria-label="Stillsmith, top of page">Stillsmith</a>
+      <nav class="nav__links" aria-label="Sections">
+        <a href="#screens">Screens</a>
+        <a href="#details">Details</a>
+        <a href="#install">Install</a>
+      </nav>
+      <a class="nav__github" href="https://github.com/CasperOng/Stillsmith" aria-label="Stillsmith source on GitHub">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero__beam" aria-hidden="true"></div>
+      <div class="hero__dust" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <h1 class="hero__title">
+            <span class="hero__brand">Stillsmith</span>
+            <span class="hero__claim">Pull the exact frame out of any video.</span>
+          </h1>
+          <p class="lede">
+            Mark frames while the video plays. Every mark is taken at the playhead&rsquo;s exact
+            time, then written to Photos at the video&rsquo;s own resolution.
+          </p>
+          <div class="actions">
+            <a class="btn btn--beam" href="#install">Install with Feather</a>
+            <a class="btn btn--quiet" href="https://github.com/CasperOng/Stillsmith">Read the source</a>
+          </div>
+          <p class="meta">iOS 17+ · iPhone and iPad · unsigned build</p>
+        </div>
+
+        <figure class="port">
+          <div class="port__rings" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="phone">
+            <img
+              src="/assets/screens/home.png"
+              alt="Stillsmith's home screen: the app title above a Choose Video button, with the developer credit at the bottom."
+              width="1206" height="2622" decoding="async" />
+          </div>
+        </figure>
+      </div>
+
+      <div class="transport" aria-labelledby="transport-label">
+        <p class="transport__label" id="transport-label">
+          The app&rsquo;s transport, here to try. Drag to a moment, then press Mark.
+        </p>
+        <div class="transport__read">
+          <span class="tl">TC</span>
+          <output class="tc" id="tc" for="rail">00:00.00</output>
+          <span class="marks"><b id="markCount">0</b> marked</span>
+        </div>
+        <div class="transport__row">
+          <div
+            class="rail"
+            id="rail"
+            role="slider"
+            tabindex="0"
+            aria-label="Scrub the sample clip"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            aria-valuetext="00 minutes 00 seconds"
+            aria-describedby="transport-label">
+            <div class="rail__ticks" id="ticks" aria-hidden="true"></div>
+            <div class="rail__marks" id="railMarks" aria-hidden="true"></div>
+            <div class="rail__head" id="head" aria-hidden="true"></div>
+          </div>
+          <button class="mark" id="mark" type="button">
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <path d="M3 13V6.5L8 3l5 3.5V13"/><path d="M8 6v7"/>
+            </svg>
+            Mark
+          </button>
+        </div>
+        <p class="sr-only" role="status" aria-live="polite" id="markStatus"></p>
+      </div>
+    </section>
+
+    <section class="sheet" id="screens">
+      <div class="sheet__inner">
+        <header class="sheet__head">
+          <h2>Three screens, nothing hidden.</h2>
+          <p>Captured from the current build, on an iPhone, with the system setting the type size.</p>
+        </header>
+
+        <ol class="frames">
+          <li class="frame">
+            <div class="frame__img">
+              <img src="/assets/screens/tutorial.png" alt="The first-run tour: a title, a short explanation, and a Continue button." width="1206" height="2622" loading="lazy" decoding="async" />
+            </div>
+            <p class="frame__cap"><span class="edge">01</span> First run. Four screens, then it gets out of the way.</p>
+          </li>
+          <li class="frame frame--marked">
+            <div class="frame__img">
+              <img src="/assets/screens/home.png" alt="The home screen with no videos yet: an empty state, a Choose Video button and the developer credit." width="1206" height="2622" loading="lazy" decoding="async" />
+              <svg class="grease" viewBox="0 0 320 620" aria-hidden="true" preserveAspectRatio="none">
+                <path d="M10 14h300M10 606h300M14 18v584M306 18v584" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".9"/>
+              </svg>
+            </div>
+            <p class="frame__cap"><span class="edge">02</span> Home. Pick a video, or hand one over from another app.</p>
+          </li>
+          <li class="frame">
+            <div class="frame__img">
+              <img src="/assets/screens/settings.png" alt="Settings: a grouped form with haptics, album saving, tutorial and version rows." width="1206" height="2622" loading="lazy" decoding="async" />
+            </div>
+            <p class="frame__cap"><span class="edge">03</span> Settings. Album, haptics, the tour again, and the version.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="spec" id="details">
+      <div class="spec__inner">
+        <header class="spec__head">
+          <h2>What it keeps</h2>
+          <p>Everything the app does is below. There is no account, no subscription and no server.</p>
+        </header>
+
+        <dl class="spec__list">
+          <div>
+            <dt>Full resolution</dt>
+            <dd>Every frame is written at the video&rsquo;s own resolution. Nothing is scaled down or re-encoded.</dd>
+          </div>
+          <div>
+            <dt>Frame-accurate</dt>
+            <dd>Marks are taken at the playhead&rsquo;s exact time, with zero tolerance either side.</dd>
+          </div>
+          <div>
+            <dt>Cancelable</dt>
+            <dd>Stop a long extraction at any point. The frames already written stay saved.</dd>
+          </div>
+          <div>
+            <dt>Album control</dt>
+            <dd>Save into a custom album, created the first time it is needed. Without full photo access, frames go to the library instead.</dd>
+          </div>
+          <div>
+            <dt>Every entrance</dt>
+            <dd>Videos arrive from the photo picker, the share sheet, Files or AirDrop. When a build cannot take a shared video, the extension says so and offers Files.</dd>
+          </div>
+          <div>
+            <dt>Accessible by default</dt>
+            <dd>Dynamic Type at every size, VoiceOver labels and hints, 44&nbsp;pt hit targets, and Reduce Motion honoured.</dd>
+          </div>
+          <div>
+            <dt>Local only</dt>
+            <dd>No network calls, no analytics, no accounts. Frames go from the video to your photo library.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="install" id="install">
+      <div class="install__inner">
+        <header class="install__head">
+          <h2>Two steps.</h2>
+          <p>Stillsmith is unsigned software. Feather signs it with the certificate on your device.</p>
+        </header>
+
+        <ol class="steps">
+          <li class="step">
+            <h3>Add the source</h3>
+            <p>In Feather, open <strong>Sources</strong>, tap <strong>+</strong>, and paste this address:</p>
+            <div class="copy">
+              <code id="feed">https://raw.githubusercontent.com/CasperOng/stillsmith-feather/main/apps.json</code>
+              <button type="button" class="copy__btn" data-copy="feed">Copy</button>
+            </div>
+          </li>
+          <li class="step">
+            <h3>Install, then sign</h3>
+            <p>Choose Stillsmith from the source and let Feather sign it. Needs iOS&nbsp;17 or later, on iPhone or iPad.</p>
+          </li>
+        </ol>
+
+        <p class="alt">
+          Prefer to build it yourself? The source, the build steps and the changelog live on
+          <a href="https://github.com/CasperOng/Stillsmith">GitHub</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="credit" id="credit">
+      <div class="credit__inner">
+        <p class="credit__line">
+          Designed, built and maintained by Casper Ong in Hong Kong.
+        </p>
+
+        <img class="signature" src="/assets/signature.svg" alt="Casper Ong's signature" width="541" height="136" loading="lazy" />
+
+        <p class="credit__meta">
+          Developed by <a href="https://casperong.is-a.dev/">Casper Ong</a>. The app and this page were built with GitHub Copilot and Claude.
+        </p>
+
+        <ul class="links">
+          <li><a href="https://casperong.is-a.dev/">casperong.is-a.dev</a></li>
+          <li><a href="https://github.com/CasperOng">GitHub</a></li>
+          <li><a href="https://github.com/CasperOng/Stillsmith/blob/main/CHANGELOG.md">Changelog</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__inner">
+      <p>© <span id="year">2026</span> Casper Ong</p>
+      <p>Stillsmith is unsigned software. Install it from the source or build it yourself.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
