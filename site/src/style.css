@@ -69,6 +69,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body::before {
@@ -84,6 +85,7 @@ body::before {
 
 body {
   margin: 0;
+  overflow-x: clip;
   background: var(--booth);
   color: var(--cream);
   font-family: var(--body);
@@ -260,9 +262,24 @@ a:hover {
   place-items: center;
   width: 40px;
   height: 40px;
+  margin-left: auto;
   margin-right: -8px;
   color: var(--cream-70);
   border-radius: 50%;
+}
+
+.nav__install {
+  display: none;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 0.5rem;
+  font-size: 0.875rem;
+  color: var(--cream-70);
+  text-decoration: none;
+}
+
+.nav__install:hover {
+  color: var(--beam);
 }
 
 .nav__github:hover {
@@ -836,6 +853,7 @@ a:hover {
 
 .clients {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0;
   border-top: var(--rule) solid var(--hair);
 }
@@ -847,6 +865,7 @@ a:hover {
   grid-template-columns: minmax(200px, 0.3fr) minmax(0, 1fr);
   gap: 1.5rem;
   align-items: start;
+  min-width: 0;
 }
 
 .client h3 {
@@ -857,6 +876,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+  min-width: 0;
 }
 
 .client__body > p {
@@ -889,10 +909,12 @@ a:hover {
   border-radius: 3px;
   background: rgba(255, 255, 255, 0.03);
   max-width: 100%;
+  min-width: 0;
 }
 
 .copy code {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   font-family: var(--mono);
   font-size: 0.75rem;
   line-height: 1.5;
@@ -1018,6 +1040,11 @@ a:hover {
 
   .nav__links {
     display: none;
+  }
+
+  .nav__install {
+    display: inline-flex;
+    margin-left: auto;
   }
 
   .frames {
