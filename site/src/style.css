@@ -1238,6 +1238,14 @@ a:hover {
     flex-direction: column;
   }
 
+  /* Stacked, the address must size to its own line instead of the flex basis
+     collapsing it to zero height. */
+  .copy code {
+    flex: 0 0 auto;
+    font-size: 0.8125rem;
+    padding: 0.8rem 0.9rem;
+  }
+
   .copy__btn {
     border-left: 0;
     border-top: var(--rule) solid var(--hair-strong);
