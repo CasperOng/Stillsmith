@@ -236,44 +236,54 @@
 
     <section class="install" id="install">
       <div class="install__inner">
-        <header class="install__head">
-          <h2>Install it your way.</h2>
-          <p>Stillsmith is unsigned software. Any tool that can sign an IPA will run it — on the device, or from a Mac.</p>
-        </header>
+        <h2>Install it your way.</h2>
+        <p class="install__lede">Stillsmith is unsigned software. Add the source to a signing app, or take the build and sign it yourself.</p>
 
-        <div class="clients">
-          <div class="client">
-            <h3>Feather, AltStore, SideStore</h3>
-            <div class="client__body">
-              <p>Add the source, then install and sign with the certificate on your device. One source works in all three; it is an AltStore-style feed.</p>
-              <div class="copy">
-                <code id="feed">https://stillsmith.is-my.app/sources</code>
-                <button type="button" class="copy__btn" data-copy="feed">Copy</button>
-              </div>
+        <div class="panel">
+          <header class="panel__head">
+            <img class="panel__icon" src="/assets/app-icon.png" alt="" width="44" height="44" />
+            <div class="panel__id">
+              <p class="panel__name">Stillsmith</p>
+              <p class="panel__sub">Download options</p>
+            </div>
+            <p class="panel__version" id="buildLabel">unsigned build</p>
+            <span class="sr-only" role="status" aria-live="polite" id="buildStatus"></span>
+          </header>
+
+          <div class="panel__block">
+            <h3>Add the source</h3>
+            <p>
+              The easiest way to install and keep it updated: add the source to a signing app. It is an
+              AltStore-style feed, so Feather, AltStore, SideStore, ESign and LiveContainer all read it.
+            </p>
+            <div class="copy">
+              <code id="feed">https://stillsmith.is-my.app/sources</code>
+              <button type="button" class="copy__btn" data-copy="feed">Copy</button>
             </div>
           </div>
 
-          <div class="client">
-            <h3>Sideloadly, or any IPA installer</h3>
-            <div class="client__body">
-              <p>Download the newest unsigned build and let the tool sign it from your Mac or PC.</p>
-              <div class="copy">
-                <code id="ipa">https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa</code>
-                <button type="button" class="copy__btn" data-copy="ipa">Copy</button>
-              </div>
+          <p class="panel__divider"><span>or add manually</span></p>
+
+          <div class="panel__block">
+            <h3>Download the build</h3>
+            <p>Take the unsigned IPA and sign it in your tool, from a Mac or a PC.</p>
+            <div class="copy">
+              <code id="ipa">https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa</code>
+              <button type="button" class="copy__btn" data-copy="ipa">Copy</button>
             </div>
+            <p class="panel__fine">Needs iOS&nbsp;17 or later, on iPhone or iPad. Frames are saved to Photos.</p>
           </div>
 
-          <div class="client">
-            <h3>Xcode</h3>
-            <div class="client__body">
-              <p>Clone the repository, open <code class="inline">Stillsmith.xcodeproj</code>, and run it on your device. The build steps are in the readme.</p>
-              <p class="client__link"><a href="https://github.com/CasperOng/Stillsmith">github.com/CasperOng/Stillsmith</a></p>
-            </div>
+          <div class="panel__block panel__block--apps">
+            <p class="panel__label">Signing apps</p>
+            <ul class="apps">
+              <li><a href="https://github.com/khcrysalis/Feather">Feather</a></li>
+              <li><a href="https://altstore.io">AltStore</a></li>
+              <li><a href="https://sidestore.io">SideStore</a></li>
+              <li><a href="https://github.com/CasperOng/Stillsmith">Xcode</a></li>
+            </ul>
           </div>
         </div>
-
-        <p class="alt">Needs iOS&nbsp;17 or later, on iPhone or iPad. Frames are saved to Photos.</p>
       </div>
     </section>
 
