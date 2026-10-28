@@ -487,6 +487,8 @@ a:hover {
 .phone {
   position: relative;
   width: min(268px, 64%);
+  border-radius: 3px;
+  overflow: hidden;
   background: #0b0c0e;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.2),
@@ -495,9 +497,9 @@ a:hover {
   transform: rotate(-1.5deg);
 }
 
-/* The capture is the whole iPhone screen, so nothing is clipped or rounded. */
+/* The whole iPhone screen stays visible; only the corners take the button radius. */
 .phone img {
-  border-radius: 0;
+  border-radius: 3px;
   width: 100%;
   height: auto;
 }
@@ -748,7 +750,7 @@ a:hover {
 
 .frame__img img {
   width: 100%;
-  border-radius: 0;
+  border-radius: 3px;
 }
 
 .frame__cap {
