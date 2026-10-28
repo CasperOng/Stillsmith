@@ -151,7 +151,7 @@ jobs:
     - name: Upload IPA Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Stillsmith-v${{ steps.app_version.outputs.app_version }}-build${{ steps.app_version.outputs.build_number }}-unsigned.ipa
+        name: Stillsmith-v${{ steps.app_version.outputs.app_version }}-build${{ steps.app_version.outputs.build_number }}-unsigned
         path: build/Stillsmith-unsigned.ipa
         retention-days: 30
         if-no-files-found: error
