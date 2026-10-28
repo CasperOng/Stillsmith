@@ -71,6 +71,17 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 body {
   margin: 0;
   background: var(--booth);
@@ -271,17 +282,18 @@ a:hover {
   inset: -30% -10% auto -35%;
   height: 150%;
   z-index: -2;
-  background: conic-gradient(
-    from 104deg at 8% -6%,
-    transparent 0deg,
-    rgba(255, 241, 208, 0.05) 10deg,
-    rgba(255, 241, 208, 0.22) 17deg,
-    rgba(242, 160, 61, 0.16) 22deg,
-    transparent 34deg
+  background: linear-gradient(
+    104deg,
+    transparent 0%,
+    rgba(255, 241, 208, 0.1) 18%,
+    rgba(255, 241, 208, 0.24) 26%,
+    rgba(242, 160, 61, 0.12) 33%,
+    transparent 48%
   );
-  filter: blur(6px);
-  transform: rotate(-6deg);
-  opacity: 0.85;
+  filter: blur(26px);
+  mix-blend-mode: screen;
+  transform: rotate(-4deg);
+  opacity: 0.9;
   pointer-events: none;
 }
 
@@ -350,7 +362,7 @@ a:hover {
   display: block;
   font-size: clamp(1.35rem, 1.02rem + 1.5vw, 2.05rem);
   line-height: 1.1;
-  color: var(--cream-70);
+  color: rgba(247, 241, 227, 0.86);
   max-width: 24ch;
 }
 
@@ -418,6 +430,16 @@ a:hover {
   display: grid;
   place-items: center;
   min-height: 460px;
+}
+
+.port::before {
+  content: '';
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 52% 46%, rgba(255, 241, 208, 0.16), rgba(242, 160, 61, 0.05) 45%, transparent 68%);
+  filter: blur(10px);
+  pointer-events: none;
 }
 
 .port__rings {
@@ -717,6 +739,7 @@ a:hover {
   height: calc(100% + 16px);
   color: var(--amber);
   pointer-events: none;
+  transform: rotate(-1.2deg);
 }
 
 .frame--marked .frame__cap {
@@ -896,9 +919,9 @@ a:hover {
 }
 
 .signature {
-  width: min(280px, 60%);
+  width: min(320px, 64%);
   height: auto;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .credit__meta {
