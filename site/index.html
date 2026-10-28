@@ -61,7 +61,7 @@
             time, then written to Photos at the video&rsquo;s own resolution.
           </p>
           <div class="actions">
-            <a class="btn btn--beam" href="#install">Install with Feather</a>
+            <a class="btn btn--beam" href="#install">Install Stillsmith</a>
             <a class="btn btn--quiet" href="https://github.com/CasperOng/Stillsmith">Read the source</a>
           </div>
           <p class="meta">iOS 17+ · iPhone and iPad · unsigned build</p>
@@ -199,26 +199,32 @@
         <div class="clients">
           <div class="client">
             <h3>Feather, AltStore, SideStore</h3>
-            <p>Add the source, then install and sign with the certificate on your device. One source works in all three; it is an AltStore-style feed.</p>
-            <div class="copy">
-              <code id="feed">https://stillsmith.is-my.app/sources</code>
-              <button type="button" class="copy__btn" data-copy="feed">Copy</button>
+            <div class="client__body">
+              <p>Add the source, then install and sign with the certificate on your device. One source works in all three; it is an AltStore-style feed.</p>
+              <div class="copy">
+                <code id="feed">https://stillsmith.is-my.app/sources</code>
+                <button type="button" class="copy__btn" data-copy="feed">Copy</button>
+              </div>
             </div>
           </div>
 
           <div class="client">
             <h3>Sideloadly, or any IPA installer</h3>
-            <p>Download the newest unsigned build and let the tool sign it from your Mac or PC.</p>
-            <div class="copy">
-              <code id="ipa">https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa</code>
-              <button type="button" class="copy__btn" data-copy="ipa">Copy</button>
+            <div class="client__body">
+              <p>Download the newest unsigned build and let the tool sign it from your Mac or PC.</p>
+              <div class="copy">
+                <code id="ipa">https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa</code>
+                <button type="button" class="copy__btn" data-copy="ipa">Copy</button>
+              </div>
             </div>
           </div>
 
           <div class="client">
             <h3>Xcode</h3>
-            <p>Clone the repository, open <code class="inline">Stillsmith.xcodeproj</code>, and run it on your device. The build steps are in the readme.</p>
-            <p class="client__link"><a href="https://github.com/CasperOng/Stillsmith">github.com/CasperOng/Stillsmith</a></p>
+            <div class="client__body">
+              <p>Clone the repository, open <code class="inline">Stillsmith.xcodeproj</code>, and run it on your device. The build steps are in the readme.</p>
+              <p class="client__link"><a href="https://github.com/CasperOng/Stillsmith">github.com/CasperOng/Stillsmith</a></p>
+            </div>
           </div>
         </div>
 

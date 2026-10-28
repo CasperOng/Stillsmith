@@ -853,7 +853,13 @@ a:hover {
   color: var(--cream);
 }
 
-.client p {
+.client__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.client__body > p {
   color: var(--cream-50);
   max-width: 62ch;
 }
@@ -875,7 +881,7 @@ a:hover {
 }
 
 .copy {
-  margin-top: 0.9rem;
+  margin-top: 0;
   display: flex;
   align-items: stretch;
   gap: 0;
