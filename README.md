@@ -123,12 +123,12 @@ If you have an Apple Developer Program membership:
 3. Configure code signing with your developer certificate
 4. Build and distribute as needed
 
-### Option 4: Feather / AltStore Source
-Every build of `main` is published as an unsigned IPA, and a separate repository turns it into a sideloading source:
+### Option 4: Feather, AltStore, SideStore or Sideloadly
+Every build of `main` is published as an unsigned IPA, and a separate repository turns it into an AltStore-compatible source:
 
-1. Open [Feather](https://github.com/khcrysalis/Feather) → **Sources** → **+**
-2. Add `https://raw.githubusercontent.com/CasperOng/stillsmith-feather/main/apps.json`
-3. Install **Stillsmith** and let Feather sign it with your own certificate
+1. In **Feather**, **AltStore** or **SideStore**, open Sources and add `https://stillsmith.is-my.app/sources`
+2. Install **Stillsmith** and let the app sign it with your own certificate
+3. On a Mac or PC, **Sideloadly** and other IPA installers can instead use the newest build directly: `https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa`
 
 The feed updates itself from the newest build, so this is the quickest way to run the current code on a device. See [stillsmith-feather](https://github.com/CasperOng/stillsmith-feather) for details.
 

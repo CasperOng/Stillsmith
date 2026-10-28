@@ -470,21 +470,19 @@ a:hover {
 .phone {
   position: relative;
   width: min(268px, 64%);
-  border-radius: 30px;
-  overflow: hidden;
   background: #0b0c0e;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.16),
-    0 0 0 7px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 0 0 6px rgba(0, 0, 0, 0.5),
     0 44px 80px -34px rgba(0, 0, 0, 0.95);
   transform: rotate(-1.5deg);
 }
 
+/* The capture is the whole iPhone screen, so nothing is clipped or rounded. */
 .phone img {
-  border-radius: 30px;
+  border-radius: 0;
   width: 100%;
-  aspect-ratio: 750 / 1334;
-  object-fit: cover;
+  height: auto;
 }
 
 /* Transport */
@@ -733,7 +731,7 @@ a:hover {
 
 .frame__img img {
   width: 100%;
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .frame__cap {
@@ -836,36 +834,44 @@ a:hover {
   color: var(--cream-50);
 }
 
-.steps {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.clients {
   display: grid;
   gap: 0;
   border-top: var(--rule) solid var(--hair);
 }
 
-.step {
+.client {
   padding: 1.5rem 0;
   border-bottom: var(--rule) solid var(--hair);
   display: grid;
-  grid-template-columns: minmax(180px, 0.3fr) minmax(0, 1fr);
+  grid-template-columns: minmax(200px, 0.3fr) minmax(0, 1fr);
   gap: 1.5rem;
   align-items: start;
 }
 
-.step h3 {
+.client h3 {
   color: var(--cream);
 }
 
-.step p {
+.client p {
   color: var(--cream-50);
-  max-width: 58ch;
+  max-width: 62ch;
 }
 
-.step strong {
+.client code.inline {
+  font-family: var(--mono);
+  font-size: 0.8em;
   color: var(--cream-70);
-  font-weight: 500;
+}
+
+.client__link {
+  margin-top: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.client__link a {
+  color: var(--cream-70);
 }
 
 .copy {
@@ -1020,7 +1026,7 @@ a:hover {
   }
 
   .spec__list > div,
-  .step {
+  .client {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }

@@ -6,6 +6,9 @@ on:
     paths:
       - 'site/**'
       - '.github/workflows/pages.yml'
+  schedule:
+    # Keeps stillsmith.is-my.app/sources level with the feed repository.
+    - cron: '23 */6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -36,6 +39,21 @@ jobs:
       - name: Build
         working-directory: site
         run: npm run build
+
+      - name: Publish the source URL
+        # stillsmith.is-my.app/sources mirrors the feed repository, so the address
+        # can be added to Feather, AltStore or SideStore without a GitHub path.
+        run: |
+          if curl -fsSL --retry 3 --retry-delay 2 --max-time 30 \
+              https://raw.githubusercontent.com/CasperOng/stillsmith-feather/main/apps.json \
+              -o /tmp/sources \
+             && python3 -c "import json; json.load(open('/tmp/sources'))"; then
+            cp /tmp/sources site/dist/sources
+            cp /tmp/sources site/dist/sources.json
+            echo "Published $(wc -c < site/dist/sources) bytes of source JSON"
+          else
+            echo "Feed unavailable; keeping the snapshot committed in site/public"
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

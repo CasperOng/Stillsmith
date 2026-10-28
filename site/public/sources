@@ -1,0 +1,38 @@
+{
+  "name": "Stillsmith",
+  "subtitle": "Pull stills out of any video",
+  "description": "Unsigned Stillsmith builds for signing with Feather.",
+  "iconURL": "https://raw.githubusercontent.com/CasperOng/stillsmith-feather/main/icons/Stillsmith.png",
+  "tintColor": "#0A84FF",
+  "apps": [
+    {
+      "name": "Stillsmith",
+      "bundleIdentifier": "caspernyong.Stillsmith",
+      "developerName": "Casper Ong",
+      "subtitle": "Pull stills out of any video",
+      "localizedDescription": "Mark frames while a video plays, then save every one of them to your photo library at the video's own resolution. Videos can be chosen in the app or handed over from the share sheet, Files, AirDrop and stillsmith:// links.",
+      "iconURL": "https://raw.githubusercontent.com/CasperOng/stillsmith-feather/main/icons/Stillsmith.png",
+      "tintColor": "#0A84FF",
+      "category": "utilities",
+      "appPermissions": {
+        "entitlements": [],
+        "privacy": {
+          "NSPhotoLibraryAddUsageDescription": "Stillsmith saves the frames you extract to your photo library.",
+          "NSPhotoLibraryUsageDescription": "Stillsmith reads the videos you choose and removes frames from your library when you delete them."
+        }
+      },
+      "versions": [
+        {
+          "version": "2.0.0",
+          "buildVersion": "90",
+          "date": "2026-10-28",
+          "localizedDescription": "Version 2.0.0 (build 90) \u2014 unsigned, ready to sign with Feather.",
+          "downloadURL": "https://raw.githubusercontent.com/CasperOng/stillsmith-feather/main/ipas/Stillsmith-2.0.0-90-a0f31bca.ipa",
+          "size": 1301019,
+          "sha256": "a0f31bca5117fca986247a8cec3bb8086fb691ed6befa9507d777c3b49dffb51",
+          "minOSVersion": "17"
+        }
+      ]
+    }
+  ]
+}

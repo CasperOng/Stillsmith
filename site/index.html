@@ -9,10 +9,19 @@
   <link rel="icon" href="/apple-touch-icon.png" sizes="192x192" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Stillsmith" />
   <meta property="og:title" content="Stillsmith — pull the exact frame out of any video" />
   <meta property="og:description" content="Mark frames while a video plays. Stillsmith saves each one to Photos at the video's own resolution." />
-  <meta property="og:image" content="/apple-touch-icon.png" />
   <meta property="og:url" content="https://stillsmith.is-my.app/" />
+  <meta property="og:image" content="https://stillsmith.is-my.app/og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Stillsmith on a dark background, with the home screen of the app." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stillsmith — pull the exact frame out of any video" />
+  <meta name="twitter:description" content="Mark frames while a video plays. Stillsmith saves each one to Photos at the video's own resolution." />
+  <meta name="twitter:image" content="https://stillsmith.is-my.app/og.png" />
   <link rel="alternate icon" href="/apple-touch-icon.png" />
   <link rel="canonical" href="https://stillsmith.is-my.app/" />
   <link rel="stylesheet" href="/src/style.css" />
@@ -183,33 +192,37 @@
     <section class="install" id="install">
       <div class="install__inner">
         <header class="install__head">
-          <h2>Two steps.</h2>
-          <p>Stillsmith is unsigned software. Feather signs it with the certificate on your device.</p>
+          <h2>Install it your way.</h2>
+          <p>Stillsmith is unsigned software. Any tool that can sign an IPA will run it — on the device, or from a Mac.</p>
         </header>
 
-        <ol class="steps">
-          <li class="step">
-            <h3>Add the source</h3>
-            <div class="step__body">
-              <p>In Feather, open <strong>Sources</strong>, tap <strong>+</strong>, and paste this address:</p>
-              <div class="copy">
-                <code id="feed">https://raw.githubusercontent.com/CasperOng/stillsmith-feather/main/apps.json</code>
-                <button type="button" class="copy__btn" data-copy="feed">Copy</button>
-              </div>
+        <div class="clients">
+          <div class="client">
+            <h3>Feather, AltStore, SideStore</h3>
+            <p>Add the source, then install and sign with the certificate on your device. One source works in all three; it is an AltStore-style feed.</p>
+            <div class="copy">
+              <code id="feed">https://stillsmith.is-my.app/sources</code>
+              <button type="button" class="copy__btn" data-copy="feed">Copy</button>
             </div>
-          </li>
-          <li class="step">
-            <h3>Install, then sign</h3>
-            <div class="step__body">
-              <p>Choose Stillsmith from the source and let Feather sign it. Needs iOS&nbsp;17 or later, on iPhone or iPad.</p>
-            </div>
-          </li>
-        </ol>
+          </div>
 
-        <p class="alt">
-          Prefer to build it yourself? The source, the build steps and the changelog live on
-          <a href="https://github.com/CasperOng/Stillsmith">GitHub</a>.
-        </p>
+          <div class="client">
+            <h3>Sideloadly, or any IPA installer</h3>
+            <p>Download the newest unsigned build and let the tool sign it from your Mac or PC.</p>
+            <div class="copy">
+              <code id="ipa">https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa</code>
+              <button type="button" class="copy__btn" data-copy="ipa">Copy</button>
+            </div>
+          </div>
+
+          <div class="client">
+            <h3>Xcode</h3>
+            <p>Clone the repository, open <code class="inline">Stillsmith.xcodeproj</code>, and run it on your device. The build steps are in the readme.</p>
+            <p class="client__link"><a href="https://github.com/CasperOng/Stillsmith">github.com/CasperOng/Stillsmith</a></p>
+          </div>
+        </div>
+
+        <p class="alt">Needs iOS&nbsp;17 or later, on iPhone or iPad. Frames are saved to Photos.</p>
       </div>
     </section>
 
