@@ -155,4 +155,86 @@ document.querySelectorAll('[data-copy]').forEach((button) => {
   })
 })
 
+
+// Nav: glass states, tone over the paper section, hide on scroll, active link, menu.
+const nav = document.getElementById("siteNav")
+const navMenu = document.getElementById("navMenu")
+const navToggle = nav?.querySelector(".nav__toggle")
+const navLinks = [...(nav?.querySelectorAll(".nav__links a") ?? [])]
+const lightSections = [...document.querySelectorAll('[data-surface="light"]')]
+const navSections = ["screens", "details", "install"]
+  .map((id) => document.getElementById(id))
+  .filter(Boolean)
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+
+if (nav) {
+  let lastY = window.scrollY
+  let queued = false
+
+  const updateNav = () => {
+    queued = false
+    const y = window.scrollY
+    nav.classList.toggle("is-scrolled", y > 50)
+
+    const overLight = lightSections.some((section) => {
+      const rect = section.getBoundingClientRect()
+      return rect.top <= 60 && rect.bottom > 60
+    })
+    nav.dataset.tone = overLight ? "light" : "dark"
+
+    if (!reducedMotion.matches) {
+      if (y > 120 && y > lastY + 8) nav.classList.add("is-hidden")
+      else if (y < lastY - 8) nav.classList.remove("is-hidden")
+    }
+    lastY = y
+
+    const current = navSections.find((section) => {
+      const rect = section.getBoundingClientRect()
+      return rect.top <= 140 && rect.bottom >= 140
+    })
+    navLinks.forEach((link) => {
+      link.classList.toggle("is-active", current ? link.hash === `#${current.id}` : false)
+    })
+  }
+
+  const onScroll = () => {
+    if (queued) return
+    queued = true
+    requestAnimationFrame(updateNav)
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true })
+  window.addEventListener("resize", onScroll)
+  updateNav()
+
+  const closeMenu = () => {
+    if (!navMenu || navMenu.hidden) return
+    navMenu.hidden = true
+    nav.classList.remove("is-open")
+    navToggle?.setAttribute("aria-expanded", "false")
+  }
+
+  navToggle?.addEventListener("click", () => {
+    const open = navMenu.hidden
+    navMenu.hidden = !open
+    nav.classList.toggle("is-open", open)
+    navToggle.setAttribute("aria-expanded", String(open))
+  })
+
+  navMenu?.addEventListener("click", (event) => {
+    if (event.target.closest("a")) closeMenu()
+  })
+
+  document.addEventListener("click", (event) => {
+    if (!nav.contains(event.target)) closeMenu()
+  })
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu()
+      nav.classList.remove("is-hidden")
+    }
+  })
+}
+
 document.getElementById('year').textContent = String(new Date().getFullYear())
