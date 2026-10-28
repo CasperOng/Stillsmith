@@ -1,5 +1,7 @@
 # stillsmith.is-my.app
 
+Live at <https://stillsmith.is-my.app>.
+
 The Stillsmith page. One static page, built with Vite, deployed to GitHub Pages by
 `.github/workflows/pages.yml`.
 

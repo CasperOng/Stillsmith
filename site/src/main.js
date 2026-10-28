@@ -73,6 +73,19 @@ const addMark = () => {
 
 // Drag anywhere on the rail; the playhead follows the finger or pointer.
 if (rail) {
+  // A 32-tick ruler, drawn rather than tiled from a gradient.
+  const ticks = document.getElementById('ticks')
+  if (ticks) {
+    const ruler = document.createDocumentFragment()
+    for (let i = 0; i <= 32; i += 1) {
+      const tick = document.createElement('span')
+      tick.className = i % 8 === 0 ? 'rail__tick rail__tick--major' : 'rail__tick'
+      tick.style.left = `${(i / 32) * 100}%`
+      ruler.append(tick)
+    }
+    ticks.replaceChildren(ruler)
+  }
+
   rail.addEventListener('pointerdown', (event) => {
     rail.setPointerCapture(event.pointerId)
     seekFromEvent(event)

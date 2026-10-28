@@ -151,8 +151,15 @@ a {
 }
 
 a:hover {
-  color: var(--beam);
   text-decoration-color: var(--amber);
+}
+
+.nav__links a:hover,
+.nav__mark:hover,
+.links a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--amber);
+  text-decoration-thickness: 1px;
 }
 
 .sr-only {
@@ -545,12 +552,19 @@ a:hover {
 .rail__ticks {
   position: absolute;
   inset: 0 0 50% 0;
-  background-image:
-    repeating-linear-gradient(90deg, var(--hair-strong) 0 1px, transparent 1px 3.125%),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0 1px, transparent 1px 12.5%);
-  background-size: 100% 10px, 100% 18px;
-  background-position: 0 bottom, 0 bottom;
-  background-repeat: repeat-x, repeat-x;
+}
+
+.rail__tick {
+  position: absolute;
+  bottom: 0;
+  width: 1px;
+  height: 9px;
+  background: var(--hair-strong);
+}
+
+.rail__tick--major {
+  height: 17px;
+  background: rgba(247, 241, 227, 0.38);
 }
 
 .rail__marks {
@@ -566,7 +580,7 @@ a:hover {
   height: 26px;
   background: var(--amber);
   transform: translateX(-1px);
-  box-shadow: 0 0 0 1px rgba(8, 9, 10, 0.6);
+  outline: 1px solid rgba(8, 9, 10, 0.6);
 }
 
 .rail__mark::after {
@@ -588,7 +602,7 @@ a:hover {
   width: 2px;
   background: var(--beam);
   transform: translateX(-1px);
-  box-shadow: 0 0 18px rgba(255, 241, 208, 0.55);
+  outline: 1px solid rgba(8, 9, 10, 0.65);
 }
 
 .rail__head::before {
@@ -636,6 +650,7 @@ a:hover {
 
 .sheet {
   position: relative;
+  padding-inline: var(--pad);
   background: var(--paper);
   color: var(--paper-ink);
   padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(4rem, 9vw, 7rem);
@@ -659,7 +674,12 @@ a:hover {
 .sheet::before { top: 0; }
 .sheet::after { bottom: 0; }
 
-.sheet__inner,
+.sheet__inner {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
 .spec__inner,
 .install__inner,
 .credit__inner {
