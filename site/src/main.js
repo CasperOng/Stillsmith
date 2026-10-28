@@ -176,9 +176,11 @@ if (nav) {
     const y = window.scrollY
     nav.classList.toggle("is-scrolled", y > 50)
 
+    // Read against the bar's own bottom edge, not a fixed offset.
+    const barBottom = nav.querySelector(".nav__pill")?.getBoundingClientRect().bottom ?? 72
     const overLight = lightSections.some((section) => {
       const rect = section.getBoundingClientRect()
-      return rect.top <= 60 && rect.bottom > 60
+      return rect.top <= barBottom && rect.bottom > barBottom
     })
     nav.dataset.tone = overLight ? "light" : "dark"
 
