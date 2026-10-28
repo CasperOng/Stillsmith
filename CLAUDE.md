@@ -8,6 +8,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The app is developed without an Apple Developer Program membership, so builds are unsigned and intended for development/testing.
 
+## Writing Rules
+
+Write for the reader, not as a record of the work. This applies to the changelog, README, commit messages, UI copy, code comments and replies.
+
+- **State the result.** Say what changed and what it does for the person using the app. Leave out deliberation, options weighed, searches run, and verification narrative.
+- **No comparisons.** Never mention other apps, the App Store, competitors, or alternatives that were rejected.
+- **Changelog**: one line per user-visible change, in the present tense. No rationale essays.
+- **Commits**: `type(scope): subject` names the change; the body says what and why. The order the work happened in is not interesting.
+- **Docs**: instructions and facts only. No "I checked…", "I found…", "I decided…", "this was verified by…".
+
 ## Build, Test & CI/CD
 
 **Do not build or test on the development machine.** GitHub Actions is the source of truth for building and testing; run work through CI and read the results there.
