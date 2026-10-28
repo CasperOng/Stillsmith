@@ -1,6 +1,6 @@
-<img width="110" height="110" alt="FrameExtractionTool-iOS-ClearDark-1024x1024@1x" src="https://github.com/user-attachments/assets/106a77c4-2cc5-4d6f-a226-9692e072935a" />
+<img width="110" height="110" alt="Stillsmith-iOS-ClearDark-1024x1024@1x" src="https://github.com/user-attachments/assets/106a77c4-2cc5-4d6f-a226-9692e072935a" />
 
-# Frame Extraction Tool
+# Stillsmith
 
 A powerful iOS app for extracting high-quality frames from videos with precision timing control.
 
@@ -16,12 +16,20 @@ A powerful iOS app for extracting high-quality frames from videos with precision
 ♿️ **Accessible** - Dynamic Type, VoiceOver labels, 44 pt hit targets and Reduce Motion support  
 ✨ **Modern UI** - Native SwiftUI navigation, forms and menus
 
+## 🆕 What's New in v2.0.0
+
+### ✨ **A New Name: Stillsmith**
+- **Stillsmith** replaces Frame Extraction Tool. A *still* is the frame you pull from a film, and the name now carries the craft with it — ten letters, so it sits under the app icon without being clipped
+- **The work is unchanged**: choose a video, mark the frames that matter, extract them at the video's own resolution
+- **New identity**: bundle identifier `caspernyong.Stillsmith`, URL scheme `stillsmith://` (existing `frameextractor://` links still work), and new extractions saved to a "Stillsmith" album by default
+- **Install it fresh**: the bundle identifier changed, so iOS treats this as a new app. Remove the earlier build after installing; frames already in your photo library are untouched
+
 ## 🆕 What's New in v1.6.0
 
 ### 📥 **Send Videos Straight to the App**
-- **Share sheet & “Open in”**: share a video with Frame Extractor from Photos, Files, Safari or any app — it opens ready to mark
-- **AirDrop**: dropping a video on your device now offers Frame Extractor
-- **`frameextractor://` links**: automations and Shortcuts can open a video with `frameextractor://open?video=<file URL>`
+- **Share sheet & “Open in”**: share a video with Stillsmith from Photos, Files, Safari or any app — it opens ready to mark
+- **AirDrop**: dropping a video on your device now offers Stillsmith
+- **`stillsmith://` links**: automations and Shortcuts can open a video with `stillsmith://open?video=<file URL>`
 
 ### ♿️ **Rebuilt to Apple's Guidelines**
 - **Dynamic Type**: text scales with your system text size
@@ -98,7 +106,7 @@ This is a very barebone app as a side project of mine. The main goal of this app
 
 ### Option 1: Build from Source (Recommended)
 1. Clone this repository
-2. Open `FrameExtractionTool.xcodeproj` in Xcode
+2. Open `Stillsmith.xcodeproj` in Xcode
 3. Connect your iOS device or use the simulator
 4. Build and run directly from Xcode
 
@@ -119,10 +127,10 @@ If you have an Apple Developer Program membership:
 Every build of `main` is published as an unsigned IPA, and a separate repository turns it into a sideloading source:
 
 1. Open [Feather](https://github.com/khcrysalis/Feather) → **Sources** → **+**
-2. Add `https://raw.githubusercontent.com/CasperOng/frame-extraction-tool-feather/main/apps.json`
-3. Install **Frame Extractor** and let Feather sign it with your own certificate
+2. Add `https://raw.githubusercontent.com/CasperOng/stillsmith-feather/main/apps.json`
+3. Install **Stillsmith** and let Feather sign it with your own certificate
 
-The feed updates itself from the newest build, so this is the quickest way to run the current code on a device. See [frame-extraction-tool-feather](https://github.com/CasperOng/frame-extraction-tool-feather) for details.
+The feed updates itself from the newest build, so this is the quickest way to run the current code on a device. See [stillsmith-feather](https://github.com/CasperOng/stillsmith-feather) for details.
 
 ## How to Use
 
@@ -136,18 +144,18 @@ The feed updates itself from the newest build, so this is the quickest way to ru
 
 ### Starting from another app
 
-You do not have to pick a video inside the app first — Frame Extractor can be handed a video:
+You do not have to pick a video inside the app first — Stillsmith can be handed a video:
 
-- **Share sheet** — in Photos, Messages, Files, Safari or any other app, tap Share and choose **Frame Extractor**.
+- **Share sheet** — in Photos, Messages, Files, Safari or any other app, tap Share and choose **Stillsmith**.
   - If the build was signed with the App Group the extension uses, the video is handed over automatically: open the app and the player is already showing it.
-  - Otherwise (self-signed builds, including Feather) the sheet offers **Save to Frame Extractor…**. Save the video into **On My iPhone → Frame Extraction Tool**, then open the app — it imports the video the moment it comes to the foreground.
-- **Open in / Open with** — in Files, share a video and choose **Frame Extractor**, or double-click it on a device with a keyboard. This route launches the app straight into the player.
-- **Drop it in the app's folder** — with file sharing on, any video saved to **On My iPhone → Frame Extraction Tool** (in Files) is picked up next time the app opens.
-- **Links and Shortcuts** — open `frameextractor://` to launch the app, or `frameextractor://open?video=<percent-encoded file URL>` to open a specific video. In Shortcuts, use **Open URLs** with that link.
+  - Otherwise (self-signed builds, including Feather) the sheet offers **Save to Stillsmith…**. Save the video into **On My iPhone → Stillsmith**, then open the app — it imports the video the moment it comes to the foreground.
+- **Open in / Open with** — in Files, share a video and choose **Stillsmith**, or double-click it on a device with a keyboard. This route launches the app straight into the player.
+- **Drop it in the app's folder** — with file sharing on, any video saved to **On My iPhone → Stillsmith** (in Files) is picked up next time the app opens.
+- **Links and Shortcuts** — open `stillsmith://` to launch the app, or `stillsmith://open?video=<percent-encoded file URL>` to open a specific video. In Shortcuts, use **Open URLs** with that link.
 
 > **Why the share extension can't jump straight into the app:** iOS only supports a share extension opening its containing app through the Today and iMessage extension points, so the extension has to hand the file over through a container and the app collects it when it becomes active. The confirmation sheet says which route is being used.
 
-> **Signing note:** the automatic hand-off relies on the App Group `group.caspernyong.FrameExtractionTool`, which must be authorised by the provisioning profile that signs the app and its extension. Xcode's automatic signing with a team that has the App Groups capability does this for you; personal teams cannot, which is why the Files route exists.
+> **Signing note:** the automatic hand-off relies on the App Group `group.caspernyong.Stillsmith`, which must be authorised by the provisioning profile that signs the app and its extension. Xcode's automatic signing with a team that has the App Groups capability does this for you; personal teams cannot, which is why the Files route exists.
 
 ## Architecture
 
@@ -169,7 +177,7 @@ This project includes two CI/CD platforms for automated building and testing:
 - **Configuration**: `.github/workflows/build-ipa.yml`
 
 ### GitHub Actions: Tests
-- **Unit tests** (`FrameExtractionToolTests`) and **UI smoke tests** (`FrameExtractionToolUITests`)
+- **Unit tests** (`StillsmithTests`) and **UI smoke tests** (`StillsmithUITests`)
 - **Configuration**: `.github/workflows/tests.yml`
 - Runs on a simulator chosen at runtime, so it works on any runner image
 

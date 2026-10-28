@@ -92,17 +92,17 @@ jobs:
         echo "Setting build number to: $BUILD_NUMBER"
 
         # Update all occurrences of CURRENT_PROJECT_VERSION
-        sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*;/CURRENT_PROJECT_VERSION = $BUILD_NUMBER;/g" FrameExtractionTool.xcodeproj/project.pbxproj
+        sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*;/CURRENT_PROJECT_VERSION = $BUILD_NUMBER;/g" Stillsmith.xcodeproj/project.pbxproj
 
     - name: Build Project with Latest SDK
       run: |
         set -o pipefail
         xcodebuild \
-          -project FrameExtractionTool.xcodeproj \
-          -scheme FrameExtractionTool \
+          -project Stillsmith.xcodeproj \
+          -scheme Stillsmith \
           -configuration ${{ github.event.inputs.build_configuration || 'Release' }} \
           -destination "generic/platform=iOS" \
-          -archivePath build/FrameExtractionTool-Latest.xcarchive \
+          -archivePath build/Stillsmith-Latest.xcarchive \
           archive \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO \
@@ -115,8 +115,8 @@ jobs:
     - name: Create Payload Directory
       run: |
         mkdir -p build/Payload
-        if [ -d "build/FrameExtractionTool-Latest.xcarchive/Products/Applications/FrameExtractionTool.app" ]; then
-          cp -r build/FrameExtractionTool-Latest.xcarchive/Products/Applications/FrameExtractionTool.app build/Payload/
+        if [ -d "build/Stillsmith-Latest.xcarchive/Products/Applications/Stillsmith.app" ]; then
+          cp -r build/Stillsmith-Latest.xcarchive/Products/Applications/Stillsmith.app build/Payload/
         else
           echo "Error: App not found in archive"
           find build/ -name "*.app" -type d
@@ -126,19 +126,19 @@ jobs:
     - name: Generate IPA
       run: |
         cd build
-        zip -r FrameExtractionTool-Latest-unsigned.ipa Payload/
+        zip -r Stillsmith-Latest-unsigned.ipa Payload/
 
     - name: Verify IPA Structure
       run: |
         cd build
-        unzip -l FrameExtractionTool-Latest-unsigned.ipa | head -20
-        ls -la FrameExtractionTool-Latest-unsigned.ipa
+        unzip -l Stillsmith-Latest-unsigned.ipa | head -20
+        ls -la Stillsmith-Latest-unsigned.ipa
 
     - name: Get App Version
       id: app_version
       run: |
-        APP_VERSION=$(xcodebuild -project FrameExtractionTool.xcodeproj -showBuildSettings -configuration Release | grep -E 'MARKETING_VERSION' | awk '{print $3}' | head -1)
-        BUILD_NUMBER=$(xcodebuild -project FrameExtractionTool.xcodeproj -showBuildSettings -configuration Release | grep -E 'CURRENT_PROJECT_VERSION' | awk '{print $3}' | head -1)
+        APP_VERSION=$(xcodebuild -project Stillsmith.xcodeproj -showBuildSettings -configuration Release | grep -E 'MARKETING_VERSION' | awk '{print $3}' | head -1)
+        BUILD_NUMBER=$(xcodebuild -project Stillsmith.xcodeproj -showBuildSettings -configuration Release | grep -E 'CURRENT_PROJECT_VERSION' | awk '{print $3}' | head -1)
         echo "app_version=${APP_VERSION}" >> $GITHUB_OUTPUT
         echo "build_number=${BUILD_NUMBER}" >> $GITHUB_OUTPUT
         echo "App Version: ${APP_VERSION}"
@@ -147,15 +147,15 @@ jobs:
     - name: Upload IPA Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: FrameExtractionTool-iOS27-v${{ steps.app_version.outputs.app_version }}-build${{ steps.app_version.outputs.build_number }}-unsigned
-        path: build/FrameExtractionTool-Latest-unsigned.ipa
+        name: Stillsmith-iOS27-v${{ steps.app_version.outputs.app_version }}-build${{ steps.app_version.outputs.build_number }}-unsigned
+        path: build/Stillsmith-Latest-unsigned.ipa
         retention-days: 30
 
     - name: Upload Archive Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: FrameExtractionTool-iOS27-archive-v${{ steps.app_version.outputs.app_version }}
-        path: build/FrameExtractionTool-Latest.xcarchive
+        name: Stillsmith-iOS27-archive-v${{ steps.app_version.outputs.app_version }}
+        path: build/Stillsmith-Latest.xcarchive
         retention-days: 7
 
     - name: Generate Build Summary
@@ -173,8 +173,8 @@ jobs:
         echo "| **Commit** | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### 📦 Artifacts Generated" >> $GITHUB_STEP_SUMMARY
-        echo "- **Unsigned IPA (iOS 27)**: \`FrameExtractionTool-iOS27-unsigned.ipa\`" >> $GITHUB_STEP_SUMMARY
-        echo "- **Xcode Archive**: \`FrameExtractionTool-iOS27.xcarchive\`" >> $GITHUB_STEP_SUMMARY
+        echo "- **Unsigned IPA (iOS 27)**: \`Stillsmith-iOS27-unsigned.ipa\`" >> $GITHUB_STEP_SUMMARY
+        echo "- **Xcode Archive**: \`Stillsmith-iOS27.xcarchive\`" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### 🔽 Download" >> $GITHUB_STEP_SUMMARY
         echo "The unsigned IPA can be downloaded from the **Artifacts** section of this workflow run." >> $GITHUB_STEP_SUMMARY
@@ -212,8 +212,8 @@ jobs:
     - name: Get App Version
       id: app_version
       run: |
-        APP_VERSION=$(xcodebuild -project FrameExtractionTool.xcodeproj -showBuildSettings -configuration Release | grep -E 'MARKETING_VERSION' | awk '{print $3}' | head -1)
-        BUILD_NUMBER=$(xcodebuild -project FrameExtractionTool.xcodeproj -showBuildSettings -configuration Release | grep -E 'CURRENT_PROJECT_VERSION' | awk '{print $3}' | head -1)
+        APP_VERSION=$(xcodebuild -project Stillsmith.xcodeproj -showBuildSettings -configuration Release | grep -E 'MARKETING_VERSION' | awk '{print $3}' | head -1)
+        BUILD_NUMBER=$(xcodebuild -project Stillsmith.xcodeproj -showBuildSettings -configuration Release | grep -E 'CURRENT_PROJECT_VERSION' | awk '{print $3}' | head -1)
 
         # Extract version from Git tag for release title
         GIT_TAG_VERSION=${GITHUB_REF#refs/tags/}
@@ -227,7 +227,7 @@ jobs:
     - name: Download IPA Artifact
       uses: actions/download-artifact@v4
       with:
-        name: FrameExtractionTool-iOS27-v${{ steps.app_version.outputs.app_version }}-build${{ steps.app_version.outputs.build_number }}-unsigned
+        name: Stillsmith-iOS27-v${{ steps.app_version.outputs.app_version }}-build${{ steps.app_version.outputs.build_number }}-unsigned
         path: ./release/
 
     - name: Generate Release Notes
@@ -250,10 +250,10 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          ./release/FrameExtractionTool-iOS27-unsigned.ipa
-        name: FrameExtractionTool ${{ steps.app_version.outputs.release_version }} (Pre-Release)
+          ./release/Stillsmith-iOS27-unsigned.ipa
+        name: Stillsmith ${{ steps.app_version.outputs.release_version }} (Pre-Release)
         body: |
-          ## 🧪 FrameExtractionTool ${{ steps.app_version.outputs.release_version }} - Pre-Release
+          ## 🧪 Stillsmith ${{ steps.app_version.outputs.release_version }} - Pre-Release
 
           > **⚠️ This is a pre-release build for testing purposes.**
 
@@ -270,8 +270,8 @@ jobs:
           ### 📦 Downloads
 
           **Two builds available:**
-          - `FrameExtractionTool-unsigned.ipa` - Standard build (iOS 17+)
-          - `FrameExtractionTool-iOS27-unsigned.ipa` - iOS 27 optimized build (iOS 27+)
+          - `Stillsmith-unsigned.ipa` - Standard build (iOS 17+)
+          - `Stillsmith-iOS27-unsigned.ipa` - iOS 27 optimized build (iOS 27+)
 
           ### 📦 Installation
 

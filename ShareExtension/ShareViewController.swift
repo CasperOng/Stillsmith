@@ -10,7 +10,7 @@ import UniformTypeIdentifiers
 
 /// Takes a video from the share sheet and gets it to the app.
 ///
-/// The extension deliberately does not try to launch Frame Extractor: iOS only
+/// The extension deliberately does not try to launch Stillsmith: iOS only
 /// supports `NSExtensionContext.open(_:completionHandler:)` in the Today and
 /// iMessage extension points, and working around that is what makes a share
 /// extension feel unreliable.
@@ -112,7 +112,7 @@ final class ShareReceiver {
 
     func receive(from context: NSExtensionContext?) async {
         guard let provider = videoProvider(in: context) else {
-            phase = .failed("There is no video to send to Frame Extractor.")
+            phase = .failed("There is no video to send to Stillsmith.")
             return
         }
 
@@ -240,7 +240,7 @@ struct ShareConfirmView: View {
                     Button {
                         receiver.saveToFiles()
                     } label: {
-                        Text("Save to Frame Extractor…")
+                        Text("Save to Stillsmith…")
                             .frame(minWidth: 200)
                     }
                     .buttonStyle(.borderedProminent)
@@ -289,8 +289,8 @@ struct ShareConfirmView: View {
     private var title: String {
         switch receiver.phase {
         case .working: "Preparing Video"
-        case .ready: "Ready in Frame Extractor"
-        case .saveToFiles: "Save the Video to Frame Extractor"
+        case .ready: "Ready in Stillsmith"
+        case .saveToFiles: "Save the Video to Stillsmith"
         case .failed: "Couldn’t Send Video"
         }
     }
@@ -298,11 +298,11 @@ struct ShareConfirmView: View {
     private var message: String {
         switch receiver.phase {
         case .working:
-            "Copying the video so Frame Extractor can read it."
+            "Copying the video so Stillsmith can read it."
         case .ready:
-            "Open Frame Extractor to mark frames — the video is waiting there."
+            "Open Stillsmith to mark frames — the video is waiting there."
         case .saveToFiles:
-            "This build was signed without the shared folder the extension usually uses. Save the video into Frame Extractor’s folder in Files, then open the app — it picks the video up from there."
+            "This build was signed without the shared folder the extension usually uses. Save the video into Stillsmith’s folder in Files, then open the app — it picks the video up from there."
         case .failed(let reason):
             reason
         }

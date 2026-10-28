@@ -12,11 +12,11 @@ import Foundation
 /// app that contains it: `NSExtensionContext.open(_:completionHandler:)` is
 /// documented as supported by the Today and iMessage extension points only.
 ///
-/// The identifiers here must match `VideoInbox.swift` in the FrameExtractionTool
+/// The identifiers here must match `VideoInbox.swift` in the Stillsmith
 /// target, and the App Group must be in both entitlements files.
 enum VideoInbox {
 
-    static let appGroupIdentifier = "group.caspernyong.FrameExtractionTool"
+    static let appGroupIdentifier = "group.caspernyong.Stillsmith"
     static let folderName = "SharedInbox"
 
     /// Extensions the app can extract frames from.
@@ -30,9 +30,9 @@ enum VideoInbox {
         var errorDescription: String? {
             switch self {
             case .unavailable:
-                return "This build of Frame Extractor cannot receive shared videos. Open the app and add the video from inside it instead."
+                return "This build of Stillsmith cannot receive shared videos. Open the app and add the video from inside it instead."
             case .unsupported(let name):
-                return "“\(name)” isn’t a video Frame Extractor can open."
+                return "“\(name)” isn’t a video Stillsmith can open."
             case .copyFailed:
                 return "The video could not be prepared. There may not be enough free space."
             }

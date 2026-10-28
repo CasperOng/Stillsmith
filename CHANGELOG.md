@@ -1,17 +1,26 @@
 # Changelog
 
-All notable changes to the Frame Extraction Tool will be documented in this file.
+All notable changes to Stillsmith are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [2.0.0] - 2026-10-29
+
+### ✨ A new name: Stillsmith
+- **Stillsmith** replaces Frame Extraction Tool. A still is the frame you pull from a film, and the name now carries the craft with it — short enough to sit under the app icon without being clipped
+- Nothing about the work changes: choose a video, mark the frames you want, extract them at the video’s own resolution
+- New bundle identifier (`caspernyong.Stillsmith`), Xcode targets, App Group (`group.caspernyong.Stillsmith`) and URL scheme (`stillsmith://`). Existing `frameextractor://` links keep working
+- New extractions are saved to a “Stillsmith” album by default
+- Because the bundle identifier changed, iOS treats this as a new app: install it fresh and remove the earlier build. Frames already in your photo library are untouched
 
 ## [1.6.0] - 2026-10-20
 
 ### ✨ New: Send videos to the app from anywhere
 - **Share sheet and “Open in” support**: the app declares the video file types it can read, so a video can be handed to it from Files, Safari, Mail or any app that shares documents, and it opens ready for frame marking
-- **Share extension**: apps whose share sheet only lists extensions — Photos, Messages, and others — now offer Frame Extractor too. It hands the video over through a shared App Group container when the signing profile allows one, and otherwise offers to save it into the app’s folder in Files, which the app imports automatically
-- **Files folder**: the app's Documents folder is visible as “On My iPhone → Frame Extraction Tool”, and any video dropped there is imported the next time the app opens
-- **`frameextractor://` links**: shortcuts and automations can open a video with `frameextractor://open?video=<file URL>`
+- **Share extension**: apps whose share sheet only lists extensions — Photos, Messages, and others — now offer Stillsmith too. It hands the video over through a shared App Group container when the signing profile allows one, and otherwise offers to save it into the app’s folder in Files, which the app imports automatically
+- **Files folder**: the app's Documents folder is visible as “On My iPhone → Stillsmith”, and any video dropped there is imported the next time the app opens
+- **`stillsmith://` links**: shortcuts and automations can open a video with `stillsmith://open?video=<file URL>`
 - Incoming videos are copied into the app’s own storage before decoding, and stale copies are cleaned up automatically
 
 ### 🎨 Rebuilt around Apple’s design guidance
@@ -102,7 +111,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🛠️ Build System Improvements
 - Fixed app icon configuration for CodeMagic CI/CD builds
-- Changed `ASSETCATALOG_COMPILER_APPICON_NAME` from 'FrameExtractionTool' to 'AppIcon'
+- Changed `ASSETCATALOG_COMPILER_APPICON_NAME` from 'Stillsmith' to 'AppIcon'
 - Updated AppIcon.appiconset with proper icon sizes for all iOS devices
 - Added complete icon assets (20x20 to 1024x1024) for iPhone, iPad, and App Store
 - Resolved CodeMagic build failures related to missing app icon assets
@@ -117,7 +126,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🔧 CI/CD Configuration
 - Removed email notifications from CodeMagic builds to prevent delivery issues
 - Simplified build artifact workflow for better reliability
-- Updated bundle identifier for CodeMagic builds: `caspernyong.FrameExtractionTool.CMTest`
+- Updated bundle identifier for CodeMagic builds: `caspernyong.Stillsmith.CMTest`
 - Removed Slack integration from CI/CD workflows
 
 ## [1.4.0] - 2025-08-14
@@ -216,6 +225,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## Links
-- **Repository**: [GitHub - FrameExtractionTool](https://github.com/CasperOng/FrameExtractionTool)
-- **Issues**: [Report bugs or request features](https://github.com/CasperOng/FrameExtractionTool/issues)
+- **Repository**: [GitHub - Stillsmith](https://github.com/CasperOng/Stillsmith)
+- **Issues**: [Report bugs or request features](https://github.com/CasperOng/Stillsmith/issues)
 - **Developer**: Built with ❤️ by Casper N.Y. Ong using SwiftUI and GitHub Copilot

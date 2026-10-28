@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Frame Extraction Tool** is a SwiftUI-based iOS app (iOS 17.0+) that extracts high-quality frames from videos with precision timing control. The app allows users to mark specific frames during playback, then extract and save them to a custom photo album. Videos can also be handed to the app from other apps (share sheet, "Open in", AirDrop, `frameextractor://` links).
+**Stillsmith** is a SwiftUI-based iOS app (iOS 17.0+) that extracts high-quality frames from videos with precision timing control. The app allows users to mark specific frames during playback, then extract and save them to a custom photo album. Videos can also be handed to the app from other apps (share sheet, "Open in", AirDrop, `stillsmith://` links).
 
 The app is developed without an Apple Developer Program membership, so builds are unsigned and intended for development/testing.
 
@@ -16,9 +16,9 @@ The app is developed without an Apple Developer Program membership, so builds ar
 | --- | --- |
 | `.github/workflows/build-ipa.yml` | Unsigned IPA on push to `main`/`develop`, PRs, tags; creates pre-releases for `v*` tags and refreshes the rolling `latest` release that the Feather feed reads |
 | `.github/workflows/build-ipa-ios27.yml` | Same build against the newest iOS SDK |
-| `.github/workflows/tests.yml` | Unit tests (`FrameExtractionToolTests`) and UI smoke tests (`FrameExtractionToolUITests`) on a simulator picked at runtime |
+| `.github/workflows/tests.yml` | Unit tests (`StillsmithTests`) and UI smoke tests (`StillsmithUITests`) on a simulator picked at runtime |
 
-Sideloading: `CasperOng/frame-extraction-tool-feather` is a public Feather source that commits the newest unsigned IPA and its `apps.json`. Its `refresh.yml` pulls the IPA from the `latest` release every six hours; a `FEED_DISPATCH_TOKEN` secret in this repository makes it immediate.
+Sideloading: `CasperOng/stillsmith-feather` is a public Feather source that commits the newest unsigned IPA and its `apps.json`. Its `refresh.yml` pulls the IPA from the `latest` release every six hours; a `FEED_DISPATCH_TOKEN` secret in this repository makes it immediate.
 
 Useful commands:
 
@@ -32,9 +32,9 @@ gh workflow run tests.yml                 # re-run tests for a branch
 For reference, the equivalent local commands are:
 
 ```bash
-xcodebuild -project FrameExtractionTool.xcodeproj -scheme FrameExtractionTool -destination 'platform=iOS Simulator,name=iPhone 17' build
-xcodebuild -project FrameExtractionTool.xcodeproj -scheme FrameExtractionTool -destination 'platform=iOS Simulator,name=iPhone 17' test
-xcodebuild -project FrameExtractionTool.xcodeproj -scheme FrameExtractionTool -configuration Release -destination 'generic/platform=iOS' -archivePath build/FrameExtractionTool.xcarchive archive CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+xcodebuild -project Stillsmith.xcodeproj -scheme Stillsmith -destination 'platform=iOS Simulator,name=iPhone 17' build
+xcodebuild -project Stillsmith.xcodeproj -scheme Stillsmith -destination 'platform=iOS Simulator,name=iPhone 17' test
+xcodebuild -project Stillsmith.xcodeproj -scheme Stillsmith -configuration Release -destination 'generic/platform=iOS' -archivePath build/Stillsmith.xcarchive archive CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 ```
 
 ## Architecture & Structure
@@ -43,7 +43,7 @@ xcodebuild -project FrameExtractionTool.xcodeproj -scheme FrameExtractionTool -c
 
 **VideoManager** (`VideoManager.swift`): `@Observable` source of truth for the loaded video, marked frames, extracted frames and extraction progress. Owns photo library access (authorization, saving, album handling, deletion) and the `AVAssetImageGenerator` pipeline.
 
-**IncomingVideoHandler** (`IncomingVideoHandler.swift`): turns a URL delivered by the system — a file hand-off or a `frameextractor://` link — into an imported video and publishes it for the UI. Reachable as `.shared` and injectable for tests.
+**IncomingVideoHandler** (`IncomingVideoHandler.swift`): turns a URL delivered by the system — a file hand-off or a `stillsmith://` link — into an imported video and publishes it for the UI. Reachable as `.shared` and injectable for tests.
 
 **VideoStore** (`VideoStore.swift`): file storage for imported videos (`Application Support/ImportedVideos`). Validates the file type with `UTType`, copies videos out of the sender's sandbox, keeps names unique, and clears out stale imports and `Documents/Inbox` leftovers at launch.
 
@@ -53,7 +53,7 @@ xcodebuild -project FrameExtractionTool.xcodeproj -scheme FrameExtractionTool -c
 
 ### UI Views
 
-- `FrameExtractionToolApp.swift` — app entry point: `WindowGroup`, environment objects, `UIApplicationDelegateAdaptor`, `onOpenURL`
+- `StillsmithApp.swift` — app entry point: `WindowGroup`, environment objects, `UIApplicationDelegateAdaptor`, `onOpenURL`
 - `ContentView.swift` — root `NavigationStack`; empty state or library summary, photo picker, player and tutorial presentation
 - `VideoImport.swift` — `MovieFile` `Transferable` (imports the picked video off the main actor) and `VideoImporter`
 - `VideoPlayerView.swift` — video surface without system controls, mark button, transport controls, playback options menu
@@ -86,13 +86,13 @@ SwiftUI, AVFoundation, Photos/PhotosUI, UniformTypeIdentifiers, Observation, OSL
 
 ## Bringing Videos Into the App
 
-`FrameExtractionTool/Info.plist` is a *partial* Info.plist: Xcode generates the rest from the target's `INFOPLIST_KEY_*` build settings and merges them with this file, so only keys with no build setting belong in it.
+`Stillsmith/Info.plist` is a *partial* Info.plist: Xcode generates the rest from the target's `INFOPLIST_KEY_*` build settings and merges them with this file, so only keys with no build setting belong in it.
 
 It declares:
 
 - `CFBundleDocumentTypes` for the movie UTIs, with `LSHandlerRank = Alternate` so the app offers to open videos without becoming the system default
 - `LSSupportsOpeningDocumentsInPlace = false`, so iOS copies handed-over files into `Documents/Inbox`
-- `CFBundleURLTypes` with the `frameextractor` scheme
+- `CFBundleURLTypes` with the `stillsmith` scheme
 
 Delivery paths:
 
@@ -111,7 +111,7 @@ Notes:
 - Unsuitable files (a PDF opened with the app, for example) surface a readable alert instead of failing silently
 - `VideoInbox.swift` exists in both targets on purpose — they are separate containers and cannot share code without extra target membership. The App Group identifier and folder name must match, and the group must be in both entitlements files
 - The App Group needs a provisioning profile that authorises it; without one the extension reports the problem instead of failing silently
-- Tests for the hand-off live in `FrameExtractionToolTests/SharedInboxTests.swift` and drive the inbox directly, so they need no extension or device
+- Tests for the hand-off live in `StillsmithTests/SharedInboxTests.swift` and drive the inbox directly, so they need no extension or device
 
 ## Important Notes
 
@@ -127,6 +127,6 @@ Notes:
 - Unit tests use **Swift Testing** (`import Testing`, `@Test`, `#expect`), UI tests use XCTest
 - Prefer unit tests for logic (formatting, importing, URL handling); the UI tests are smoke tests for launch, the empty state, Settings and the tutorial
 - Test the golden path manually when a change touches them: choose a video → play → mark frames → extract → verify in the photo album
-- Share/open-in paths can be exercised by opening a file URL from another app, AirDropping a video, or opening `frameextractor://open?video=…`
+- Share/open-in paths can be exercised by opening a file URL from another app, AirDropping a video, or opening `stillsmith://open?video=…`
 - When modifying photo library integration, verify both app-side deletion and actual Photos app cleanup
 - Haptic feedback should be tested on a physical device (simulator has limited haptic support)

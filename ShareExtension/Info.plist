@@ -6,7 +6,7 @@
 	  Partial Info.plist: Xcode merges it with the keys generated from this
 	  target's INFOPLIST_KEY_* build settings.
 
-	  The activation rule is what puts Frame Extractor in the share sheet of
+	  The activation rule is what puts Stillsmith in the share sheet of
 	  apps that hand over a movie — including Photos, whose share sheet lists
 	  share extensions rather than apps that declare a document type.
 	-->
