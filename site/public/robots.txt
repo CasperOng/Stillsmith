@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /sources
+Disallow: /share-card.html
+
+Sitemap: https://stillsmith.is-my.app/sitemap.xml
