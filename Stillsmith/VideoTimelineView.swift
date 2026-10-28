@@ -133,18 +133,34 @@ struct VideoTimelineView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: AppTheme.Spacing.sm) {
                 ForEach(markedFrames) { frame in
-                    Button {
-                        onSeek(frame.timeStamp)
-                    } label: {
-                        Text(frame.timeString)
-                            .font(AppTheme.Typography.caption)
-                            .monospacedDigit()
-                            .padding(.horizontal, AppTheme.Spacing.md)
-                            .padding(.vertical, AppTheme.Spacing.sm)
-                            .background(.quaternary, in: .capsule)
+                    HStack(spacing: 0) {
+                        Button {
+                            onSeek(frame.timeStamp)
+                        } label: {
+                            Text(frame.timeString)
+                                .font(AppTheme.Typography.caption)
+                                .monospacedDigit()
+                                .padding(.leading, AppTheme.Spacing.md)
+                                .padding(.trailing, AppTheme.Spacing.sm)
+                                .frame(height: AppTheme.minimumHitTarget)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(PressableButtonStyle())
+                        .accessibilityLabel("Jump to marked frame at \(frame.accessibilityTimeString)")
+
+                        Button {
+                            onRemoveMark(frame.id)
+                        } label: {
+                            Image(systemName: "xmark")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                                .frame(width: AppTheme.minimumHitTarget, height: AppTheme.minimumHitTarget)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("Remove mark at \(frame.accessibilityTimeString)")
                     }
-                    .buttonStyle(PressableButtonStyle())
-                    .accessibilityLabel("Marked frame at \(frame.accessibilityTimeString)")
+                    .background(.quaternary, in: .capsule)
                     .contextMenu {
                         Button("Remove Mark", systemImage: "trash", role: .destructive) {
                             onRemoveMark(frame.id)

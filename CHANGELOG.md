@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adding frames to a custom album no longer fails silently — albums need read-write access, and frames fall back to the library with an explanation
 - Photo library authorization is requested once per run instead of once per frame
 - Extraction can be cancelled, and the result screen reports how many frames were saved or failed
+- A mark can be removed where it sits: the × on its time chip, tapping Mark again at the same moment, or Remove All Marks in the options menu
 - The Settings screen shows the real bundle version (it previously displayed a stale hard-coded version)
 - Removed the leftover Share Extension build phases, target stubs and the unused App Group entitlement from the project
 

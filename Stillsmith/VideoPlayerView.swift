@@ -105,6 +105,7 @@ struct VideoPlayerView: View {
     @State private var isShowingHelp = false
     @State private var isSuggestingDiscard = false
     @State private var markedFramesAtEntry = 0
+    @State private var isConfirmingClearAll = false
     @State private var customSpeedText = ""
     @State private var isEnteringCustomSpeed = false
 
@@ -114,6 +115,12 @@ struct VideoPlayerView: View {
 
     private var hasUnmarkedChanges: Bool {
         markedCount != markedFramesAtEntry
+    }
+
+    /// Whether a mark already sits at the playhead, so the button can undo it.
+    private var isMarkedAtPlayhead: Bool {
+        let seconds = CMTimeGetSeconds(currentTime)
+        return videoManager.markedFrames.contains { abs($0.seconds - seconds) <= 0.05 }
     }
 
     var body: some View {
@@ -185,6 +192,14 @@ struct VideoPlayerView: View {
         } message: {
             Text("Enter a speed between 0.25× and 2×.")
         }
+        .confirmationDialog("Remove every mark?", isPresented: $isConfirmingClearAll) {
+            Button("Remove All \(markedCount) Marks", role: .destructive) {
+                videoManager.clearMarkedFrames()
+            }
+            Button("Keep Them", role: .cancel) {}
+        } message: {
+            Text("This clears the frames you have marked. Frames already extracted stay in your library.")
+        }
         .alert("Unmarked Your Frames?", isPresented: $isSuggestingDiscard) {
             Button("Discard \(markedCount) Marked Frames", role: .destructive) {
                 videoManager.clearMarkedFrames()
@@ -251,18 +266,20 @@ struct VideoPlayerView: View {
             HStack {
                 Spacer()
                 Button {
-                    videoManager.markFrame(at: player?.currentTime() ?? currentTime)
+                    videoManager.toggleMark(at: player?.currentTime() ?? currentTime)
                 } label: {
-                    Image(systemName: "plus")
+                    Image(systemName: isMarkedAtPlayhead ? "minus" : "plus")
                         .font(.title2.weight(.semibold))
                         .foregroundStyle(.white)
                         .frame(width: 60, height: 60)
-                        .background(.tint, in: .circle)
+                        .background(isMarkedAtPlayhead ? Color.orange : Color.accentColor, in: .circle)
                         .shadow(color: .black.opacity(0.35), radius: 8, y: 4)
                 }
                 .buttonStyle(PressableButtonStyle())
-                .accessibilityLabel("Mark frame")
-                .accessibilityHint("Adds the frame on screen to the frames to extract")
+                .accessibilityLabel(isMarkedAtPlayhead ? "Remove mark" : "Mark frame")
+                .accessibilityHint(isMarkedAtPlayhead
+                    ? "Removes the mark at this moment"
+                    : "Adds the frame on screen to the frames to extract")
                 .padding(AppTheme.Spacing.xl)
             }
         }
@@ -373,6 +390,15 @@ struct VideoPlayerView: View {
                         ))
                     }
                 }
+
+                Divider()
+
+                Button(role: .destructive) {
+                    isConfirmingClearAll = true
+                } label: {
+                    Label("Remove All \(markedCount) Marks", systemImage: "trash")
+                }
+                .disabled(markedCount == 0)
 
                 Divider()
 

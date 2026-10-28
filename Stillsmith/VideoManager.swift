@@ -49,6 +49,16 @@ final class VideoManager {
         Haptics.impact(.medium)
     }
 
+    /// Marks the playhead, or removes the mark already sitting there.
+    func toggleMark(at time: CMTime) {
+        let seconds = CMTimeGetSeconds(time)
+        if let existing = markedFrames.first(where: { abs($0.seconds - seconds) <= 0.05 }) {
+            unmarkFrame(id: existing.id)
+        } else {
+            markFrame(at: time)
+        }
+    }
+
     func unmarkFrame(id: UUID) {
         guard markedFrames.contains(where: { $0.id == id }) else { return }
         markedFrames.removeAll { $0.id == id }

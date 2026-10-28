@@ -32,9 +32,9 @@ struct FrameMarkingHelpView: View {
                         detail: "Tap a flag on the timeline, or a time at the bottom, to jump to that frame."
                     )
                     HelpRow(
-                        symbol: "trash",
+                        symbol: "xmark.circle",
                         title: "Remove a mark",
-                        detail: "Touch and hold a flag, or a time at the bottom, and choose Remove Mark."
+                        detail: "Tap the small × on a time at the bottom, or tap the marker again at the same moment. All marks can be cleared from the options menu."
                     )
                 }
 
