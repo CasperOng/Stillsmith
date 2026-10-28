@@ -603,6 +603,13 @@ a:hover {
 
 /* ── Contact sheet ──────────────────────────────────────────────────────── */
 
+#screens,
+#details,
+#install,
+#credit {
+  scroll-margin-top: 76px;
+}
+
 .sheet {
   position: relative;
   background: var(--paper);
@@ -675,8 +682,8 @@ a:hover {
 
 .frame__img {
   position: relative;
-  background: #dddddd;
-  padding: 10px 10px 0;
+  background: #e6e6e4;
+  padding: 10px;
   border-radius: 4px;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 18px 30px -22px rgba(20, 18, 14, 0.7);
 }
