@@ -462,20 +462,22 @@ a:hover {
 
 .phone {
   position: relative;
-  width: min(264px, 62%);
-  padding: 9px;
-  border-radius: 34px;
-  background: linear-gradient(160deg, #2b2d31, #0f1012 55%);
+  width: min(268px, 64%);
+  border-radius: 30px;
+  overflow: hidden;
+  background: #0b0c0e;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.14) inset,
-    0 40px 80px -30px rgba(0, 0, 0, 0.9),
-    0 0 0 1px rgba(0, 0, 0, 0.6);
+    0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 0 0 7px rgba(0, 0, 0, 0.55),
+    0 44px 80px -34px rgba(0, 0, 0, 0.95);
   transform: rotate(-1.5deg);
 }
 
 .phone img {
-  border-radius: 26px;
+  border-radius: 30px;
   width: 100%;
+  aspect-ratio: 750 / 1334;
+  object-fit: cover;
 }
 
 /* Transport */
