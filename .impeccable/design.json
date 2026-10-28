@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "tokens": {
+    "shadows": {
+      "phone": "0 1px 0 rgba(255,255,255,0.14) inset, 0 40px 80px -30px rgba(0,0,0,0.9), 0 0 0 1px rgba(0,0,0,0.6)",
+      "print": "0 1px 0 rgba(255,255,255,0.6) inset, 0 18px 30px -22px rgba(20,18,14,0.7)",
+      "focus": "0 0 0 2px #08090a, 0 0 0 4px #f2a03d"
+    },
+    "motion": {
+      "ease": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "entrance": "900ms",
+      "control": "160ms",
+      "dust": "22s–34s linear, opacity and translate only",
+      "reduced": "animation-duration 0.001ms, scroll-behavior auto"
+    },
+    "breakpoints": {
+      "hero stacks": "960px",
+      "transport stacks": "560px"
+    },
+    "tonalRamps": {
+      "booth": ["#08090a", "#101113", "#17181b", "#1f2023"],
+      "paper": ["#ece5d5", "#e6e6e4", "#ddd8ca"],
+      "light": ["#fff1d0", "#f2a03d", "#c5791f"]
+    }
+  },
+  "components": [
+    {
+      "name": "button-primary",
+      "html": "<a class=\"btn btn--beam\" href=\"#install\">Install with Feather</a>",
+      "css": ".btn{display:inline-flex;align-items:center;min-height:48px;padding:0 1.25rem;border-radius:3px;font:500 0.9375rem/1 'Space Grotesk',sans-serif;text-decoration:none}.btn--beam{background:#fff1d0;color:#191307}.btn--beam:hover{background:#f2a03d}"
+    },
+    {
+      "name": "transport-rail",
+      "html": "<div class=\"rail\" role=\"slider\" tabindex=\"0\" aria-label=\"Scrub the sample clip\"><div class=\"rail__head\"></div></div>",
+      "css": ".rail{position:relative;height:44px;cursor:ew-resize;touch-action:none}.rail__head{position:absolute;top:0;bottom:0;width:2px;background:#fff1d0;box-shadow:0 0 18px rgba(255,241,208,0.55)}.rail__mark{position:absolute;width:2px;height:26px;background:#f2a03d}"
+    },
+    {
+      "name": "screen-print",
+      "html": "<div class=\"frame__img\"><img src=\"/assets/screens/home.png\" alt=\"\" /></div>",
+      "css": ".frame__img{position:relative;background:#e6e6e4;padding:10px;border-radius:4px;box-shadow:0 1px 0 rgba(255,255,255,0.6) inset,0 18px 30px -22px rgba(20,18,14,0.7)}.frame__img img{width:100%;border-radius:2px}"
+    },
+    {
+      "name": "spec-row",
+      "html": "<div><dt>Full resolution</dt><dd>Every frame is written at the video’s own resolution.</dd></div>",
+      "css": ".spec__list>div{display:grid;grid-template-columns:minmax(140px,.32fr) minmax(0,1fr);gap:1.5rem;padding:1.15rem 0;border-bottom:1px solid rgba(255,255,255,.1)}.spec__list dt{font:400 .75rem/1.5 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#f2a03d}"
+    }
+  ],
+  "narrative": {
+    "northStar": "A still is a frame held in the projector's light.",
+    "rules": [
+      "Red is reserved for destructive actions.",
+      "Hairlines and light separate surfaces; cards are not the system.",
+      "Monospace appears only for timecode, frame numbers and data.",
+      "The transport is the page's one authored motion."
+    ],
+    "dos": [
+      "Let the paper section be the only light surface.",
+      "Show the real screenshots inside a print-like border.",
+      "Keep the claim at near-full contrast against the booth."
+    ],
+    "donts": [
+      "No gradient text, glass cards, or icon-tile grids.",
+      "No eyebrows above headings.",
+      "No claims the app cannot back up."
+    ]
+  }
+}
