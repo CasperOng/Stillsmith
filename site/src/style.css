@@ -650,10 +650,9 @@ a:hover {
 
 .sheet {
   position: relative;
-  padding-inline: var(--pad);
   background: var(--paper);
   color: var(--paper-ink);
-  padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(4rem, 9vw, 7rem);
+  padding: clamp(3.5rem, 8vw, 6rem) var(--pad) clamp(4rem, 9vw, 7rem);
   margin-top: clamp(3rem, 7vw, 5rem);
 }
 
