@@ -10,6 +10,7 @@ jobs:
   capture:
     name: Capture app screens
     runs-on: macos-15
+    timeout-minutes: 30
 
     steps:
     - name: Checkout Repository
@@ -29,6 +30,12 @@ jobs:
         echo "Using $NAME ($UDID)"
         echo "udid=${UDID}" >> "$GITHUB_OUTPUT"
 
+    - name: Boot the Simulator
+      run: |
+        UDID="${{ steps.simulator.outputs.udid }}"
+        xcrun simctl boot "$UDID" 2>/dev/null || true
+        xcrun simctl bootstatus "$UDID" -b
+
     - name: Run Screenshot Tests
       run: |
         set -o pipefail
@@ -38,6 +45,9 @@ jobs:
           -destination "id=${{ steps.simulator.outputs.udid }}" \
           -only-testing:StillsmithUITests/StillsmithScreenshotTests \
           -parallel-testing-enabled NO \
+          -test-timeouts-enabled YES \
+          -default-test-execution-time-allowance 180 \
+          -maximum-test-execution-time-allowance 420 \
           -resultBundlePath build/Screenshots.xcresult \
           | tee xcodebuild-screenshots.log
 

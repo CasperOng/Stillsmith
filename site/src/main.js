@@ -142,24 +142,4 @@ document.querySelectorAll('[data-copy]').forEach((button) => {
   })
 })
 
-// Entrance: one move, from an already-visible default where motion is reduced.
-const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-if (!reduced && 'IntersectionObserver' in window) {
-  const targets = document.querySelectorAll('.sheet__head, .frame, .spec__head, .spec__list > div, .install__head, .step, .credit__inner')
-  targets.forEach((element) => element.classList.add('reveal'))
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return
-        entry.target.classList.add('in')
-        observer.unobserve(entry.target)
-      })
-    },
-    { rootMargin: '0px 0px -12% 0px', threshold: 0.05 },
-  )
-
-  targets.forEach((element) => observer.observe(element))
-}
-
 document.getElementById('year').textContent = String(new Date().getFullYear())

@@ -1025,22 +1025,3 @@ a:hover {
     transition-duration: 0.001ms !important;
   }
 }
-
-/* Entrance: from visible, one authored move. */
-.reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
-}
-
-.reveal.in {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
-}
