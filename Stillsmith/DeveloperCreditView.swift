@@ -31,7 +31,7 @@ struct DeveloperCreditView: View {
 
                 VStack(spacing: AppTheme.Spacing.xs) {
                     Text("Developed by Casper Ong")
-                    Text("With the help of GitHub Copilot and Claude")
+                    Text("With the help of GitHub Copilot and OpenCode")
                 }
                 .font(AppTheme.Typography.footnote)
                 .multilineTextAlignment(.center)
