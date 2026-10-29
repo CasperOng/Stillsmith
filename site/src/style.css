@@ -1128,6 +1128,79 @@ a:hover {
   cursor: not-allowed;
 }
 
+/* Playback speed is the one transport control the browser demo does not have. */
+.speedtease {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 42px;
+  padding: 0 0.65rem;
+  border: var(--rule) solid rgba(242, 160, 61, 0.32);
+  border-radius: 3px;
+  background: rgba(242, 160, 61, 0.04);
+  color: var(--cream-70);
+  text-decoration: none;
+  transition: background 160ms var(--ease), border-color 160ms var(--ease), color 160ms var(--ease);
+}
+
+.speedtease:hover {
+  border-color: rgba(242, 160, 61, 0.6);
+  background: rgba(242, 160, 61, 0.08);
+  color: var(--beam);
+}
+
+.speedtease__icon {
+  flex: none;
+  color: var(--amber);
+}
+
+.speedtease__label {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cream-50);
+}
+
+.speedtease__value {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--cream);
+}
+
+.speedtease__soon {
+  margin-left: 0.15rem;
+  padding: 0.18rem 0.35rem;
+  border-radius: 2px;
+  background: rgba(242, 160, 61, 0.14);
+  color: var(--amber);
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  line-height: 1.35;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.deck__speednote {
+  flex: 1 1 100%;
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--cream-50);
+}
+
+.deck__speednote a {
+  color: var(--cream-70);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(242, 160, 61, 0.45);
+}
+
+.deck__speednote a:hover {
+  color: var(--beam);
+}
+
 .deck__status {
   flex: 1 1 100%;
   min-height: 2.4em;
@@ -1692,6 +1765,101 @@ a:hover {
   color: var(--cream-70);
 }
 
+/* The source address and the build link sit in one command row. */
+.copy {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  border: var(--rule) solid var(--hair-strong);
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
+  overflow: hidden;
+}
+
+.copy__tag {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 0 0.7rem;
+  border-right: var(--rule) solid var(--hair);
+  background: rgba(242, 160, 61, 0.05);
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.copy code {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.8rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--cream-70);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy__btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-width: 8.25rem;
+  min-height: 46px;
+  padding: 0 0.95rem;
+  border: 0;
+  border-left: var(--rule) solid var(--hair-strong);
+  background: transparent;
+  color: var(--cream-70);
+  font: 500 0.8125rem/1 var(--body);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 160ms var(--ease), color 160ms var(--ease);
+}
+
+.copy__btn:hover {
+  background: rgba(242, 160, 61, 0.08);
+  color: var(--beam);
+}
+
+.copy__btn:focus-visible {
+  outline-offset: -3px;
+}
+
+.copy__icon {
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  color: var(--amber);
+}
+
+.copy__glyph {
+  display: block;
+}
+
+.copy__glyph--check {
+  display: none;
+}
+
+.copy__btn.is-copied {
+  background: rgba(242, 160, 61, 0.1);
+  color: var(--amber);
+}
+
+.copy__btn.is-copied .copy__glyph--copy {
+  display: none;
+}
+
+.copy__btn.is-copied .copy__glyph--check {
+  display: block;
+}
+
 /* One tap per signing app: the source lands on the clipboard. */
 .signers {
   list-style: none;
@@ -1964,21 +2132,25 @@ a:hover {
     justify-content: center;
   }
 
-  .copy {
-    flex-direction: column;
+  .copy__tag {
+    display: none;
   }
 
-  /* Stacked, the address must size to its own line instead of the flex basis
-     collapsing it to zero height. */
   .copy code {
-    flex: 0 0 auto;
-    font-size: 0.8125rem;
-    padding: 0.8rem 0.9rem;
+    font-size: 0.6875rem;
+    padding: 0.75rem 0.8rem;
   }
 
   .copy__btn {
-    border-left: 0;
-    border-top: var(--rule) solid var(--hair-strong);
+    gap: 0.35rem;
+    min-width: 7.5rem;
+    padding: 0 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .copy__icon {
+    width: 13px;
+    height: 13px;
   }
 
   .credit__line {

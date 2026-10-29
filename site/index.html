@@ -254,6 +254,17 @@
                 </button>
                 <button class="deck__ghost" id="removeAll" type="button" disabled>Remove all</button>
                 <button class="deck__ghost" id="changeVideo" type="button">Change video</button>
+                <a class="speedtease" href="#install" aria-label="Playback speed is coming to the web demo. It is already available in the Stillsmith app.">
+                  <svg class="speedtease__icon" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+                    <path d="M2.5 11.5a5.5 5.5 0 1 1 11 0" />
+                    <path d="M8 11.5L10.7 8" />
+                    <circle cx="8" cy="11.5" r="1" fill="currentColor" stroke="none" />
+                  </svg>
+                  <span class="speedtease__label">Speed</span>
+                  <span class="speedtease__value">1&times;</span>
+                  <span class="speedtease__soon">Coming soon</span>
+                </a>
+                <p class="deck__speednote">Playback speed is coming to this demo. It is already available in the <a href="#install">Stillsmith app</a>.</p>
                 <span class="deck__status" id="studioStatus" role="status" aria-live="polite"></span>
               </div>
             </div>
@@ -391,8 +402,15 @@
                 <li><button type="button" class="signer" data-copy="feed">LiveContainer</button></li>
               </ul>
               <div class="copy">
-                <code id="feed">https://stillsmith.is-my.app/sources</code>
-                <button type="button" class="copy__btn" data-copy="feed">Copy</button>
+                <span class="copy__tag">Source</span>
+                <code id="feed" title="https://stillsmith.is-my.app/sources">https://stillsmith.is-my.app/sources</code>
+                <button type="button" class="copy__btn" data-copy="feed">
+                  <span class="copy__icon" aria-hidden="true">
+                    <svg class="copy__glyph copy__glyph--copy" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><rect x="5.6" y="4.6" width="7.9" height="9" rx="1.2"/><path d="M10.6 4.6V3.2A1.2 1.2 0 0 0 9.4 2H3.8a1.2 1.2 0 0 0-1.2 1.2v7.1a1.2 1.2 0 0 0 1.2 1.2h1.8"/></svg>
+                    <svg class="copy__glyph copy__glyph--check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.4l3.2 3.2L13 4.6"/></svg>
+                  </span>
+                  <span class="copy__label">Copy source</span>
+                </button>
               </div>
             </div>
           </div>
@@ -402,8 +420,15 @@
             <div class="client__body">
               <p>Download the newest unsigned build and let the tool sign it from your Mac or PC.</p>
               <div class="copy">
-                <code id="ipa">https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa</code>
-                <button type="button" class="copy__btn" data-copy="ipa">Copy</button>
+                <span class="copy__tag">IPA</span>
+                <code id="ipa" title="https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa">https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa</code>
+                <button type="button" class="copy__btn" data-copy="ipa">
+                  <span class="copy__icon" aria-hidden="true">
+                    <svg class="copy__glyph copy__glyph--copy" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><rect x="5.6" y="4.6" width="7.9" height="9" rx="1.2"/><path d="M10.6 4.6V3.2A1.2 1.2 0 0 0 9.4 2H3.8a1.2 1.2 0 0 0-1.2 1.2v7.1a1.2 1.2 0 0 0 1.2 1.2h1.8"/></svg>
+                    <svg class="copy__glyph copy__glyph--check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.4l3.2 3.2L13 4.6"/></svg>
+                  </span>
+                  <span class="copy__label">Copy link</span>
+                </button>
               </div>
             </div>
           </div>

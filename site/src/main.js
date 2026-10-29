@@ -139,10 +139,15 @@ document.querySelectorAll('[data-copy]').forEach((button) => {
     const target = document.getElementById(button.dataset.copy)
     if (!target) return
     const value = target.textContent.trim()
-    const label = button.dataset.label ?? button.textContent.trim()
+    const labelNode = button.querySelector('.copy__label')
+    const label = button.dataset.label ?? labelNode?.textContent.trim() ?? button.textContent.trim()
+    const setLabel = (text) => {
+      if (labelNode) labelNode.textContent = text
+      else button.textContent = text
+    }
     try {
       await navigator.clipboard.writeText(value)
-      button.textContent = 'Copied'
+      setLabel('Copied')
       button.classList.add('is-copied')
     } catch {
       // Older browsers and non-secure contexts: select the text so people can copy it.
@@ -151,10 +156,10 @@ document.querySelectorAll('[data-copy]').forEach((button) => {
       const selection = window.getSelection()
       selection.removeAllRanges()
       selection.addRange(range)
-      button.textContent = 'Selected'
+      setLabel('Selected')
     }
     window.setTimeout(() => {
-      button.textContent = label
+      setLabel(label)
       button.classList.remove('is-copied')
     }, 2000)
   })
