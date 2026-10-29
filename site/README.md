@@ -24,6 +24,8 @@ npm run build    # → site/dist
 | `public/assets/fonts` | Syne, Space Grotesk and JetBrains Mono, self-hosted (OFL) |
 | `public/assets/screens` | Screenshots captured from the app by the UI tests |
 | `public/assets/signature.svg` | Casper Ong's signature, shared with casperong.is-a.dev |
+| `public/favicon.ico`, `favicon-96.png`, `favicon-192.png`, `apple-touch-icon.png` | The app icon, resized from `Stillsmith/Assets.xcassets/AppIcon.appiconset` |
+| `public/site.webmanifest` | Name and icons used when the page is installed |
 | `public/CNAME` | The custom domain, copied into the build |
 
 ## Screenshots

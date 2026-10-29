@@ -1,0 +1,15 @@
+{
+  "name": "Stillsmith",
+  "short_name": "Stillsmith",
+  "description": "Mark frames while a video plays and save each one to Photos at the video's own resolution.",
+  "url": "https://stillsmith.is-my.app/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#08090A",
+  "theme_color": "#08090A",
+  "icons": [
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/app-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
