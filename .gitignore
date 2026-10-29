@@ -211,8 +211,8 @@ vendor/bundle/
 
 # Environment variables
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
 # Archive exports
 Payload/
@@ -224,14 +224,19 @@ Payload/
 *.mobileprovision
 *.provisionprofile
 
-# Certificate files
+# Certificate and key files
 *.p12
+*.p8
+*.pem
+*.key
 *.cer
 *.csr
 
-# Keychain files
+# Keychain and keystore files
 *.keychain
 *.keychain-db
+*.jks
+*.keystore
 
 # GitHub Copilot instructions (internal development)
 .github/instructions/
