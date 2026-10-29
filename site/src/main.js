@@ -137,9 +137,11 @@ document.querySelectorAll('[data-copy]').forEach((button) => {
     const target = document.getElementById(button.dataset.copy)
     if (!target) return
     const value = target.textContent.trim()
+    const label = button.dataset.label ?? button.textContent.trim()
     try {
       await navigator.clipboard.writeText(value)
       button.textContent = 'Copied'
+      button.classList.add('is-copied')
     } catch {
       // Older browsers and non-secure contexts: select the text so people can copy it.
       const range = document.createRange()
@@ -150,7 +152,8 @@ document.querySelectorAll('[data-copy]').forEach((button) => {
       button.textContent = 'Selected'
     }
     window.setTimeout(() => {
-      button.textContent = 'Copy'
+      button.textContent = label
+      button.classList.remove('is-copied')
     }, 2000)
   })
 })
@@ -239,27 +242,5 @@ if (nav) {
   })
 }
 
-
-// The download panel reads the published source for its version and date.
-const buildLabel = document.getElementById("buildLabel")
-const buildStatus = document.getElementById("buildStatus")
-
-if (buildLabel) {
-  fetch("/sources", { headers: { Accept: "application/json" } })
-    .then((response) => (response.ok ? response.json() : Promise.reject(new Error("no source"))))
-    .then((source) => {
-      const version = source?.apps?.[0]?.versions?.[0]
-      if (!version) return
-      const date = new Date(`${version.date}T00:00:00Z`)
-      const when = Number.isNaN(date.getTime())
-        ? ""
-        : date.toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" })
-      buildLabel.textContent = [version.version, when].filter(Boolean).join(" · ")
-      if (buildStatus) buildStatus.textContent = `Version ${version.version}, build ${version.buildVersion}.`
-    })
-    .catch(() => {
-      buildLabel.textContent = "unsigned build"
-    })
-}
 
 document.getElementById('year').textContent = String(new Date().getFullYear())
