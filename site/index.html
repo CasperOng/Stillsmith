@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stillsmith — pull the exact frame out of any video</title>
-  <meta name="description" content="Mark frames while a video plays. Stillsmith saves each one to Photos at the video's own resolution. iOS 17+, iPhone and iPad." />
+  <meta name="description" content="Mark frames while a video plays, then save each one at full resolution. Try it in your browser, or install on iOS 17+." />
   <meta name="theme-color" content="#08090A" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
@@ -13,7 +13,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Stillsmith" />
   <meta property="og:title" content="Stillsmith — pull the exact frame out of any video" />
-  <meta property="og:description" content="Mark frames while a video plays. Stillsmith saves each one to Photos at the video's own resolution." />
+  <meta property="og:description" content="Mark frames while a video plays, then save each one at full resolution. Try it in the browser." />
   <meta property="og:url" content="https://stillsmith.is-my.app/" />
   <meta property="og:image" content="https://stillsmith.is-my.app/og.png" />
   <meta property="og:image:type" content="image/png" />
@@ -22,7 +22,7 @@
   <meta property="og:image:alt" content="Stillsmith on a dark background, with the home screen of the app." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Stillsmith — pull the exact frame out of any video" />
-  <meta name="twitter:description" content="Mark frames while a video plays. Stillsmith saves each one to Photos at the video's own resolution." />
+  <meta name="twitter:description" content="Mark frames while a video plays, then save each one at full resolution. Try it in the browser." />
   <meta name="twitter:image" content="https://stillsmith.is-my.app/og.png" />
   <meta name="google-site-verification" content="297a3279b408bda7" />
   <meta name="robots" content="index, follow" />
@@ -39,7 +39,7 @@
       "image": "https://stillsmith.is-my.app/og.png",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "iOS 17 or later",
-      "softwareVersion": "2.0.0",
+      "softwareVersion": "2.0.1",
       "downloadUrl": "https://github.com/CasperOng/Stillsmith/releases/download/latest/Stillsmith-unsigned.ipa",
       "isAccessibleForFree": true,
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -72,6 +72,7 @@
       <a class="nav__mark" href="#top" aria-label="Stillsmith, back to top">Stillsmith</a>
 
       <nav class="nav__links" aria-label="Sections">
+        <a href="#try">Try it</a>
         <a href="#screens">Screens</a>
         <a href="#details">Details</a>
         <a href="#credit">Credits</a>
@@ -93,6 +94,7 @@
     </div>
 
     <div class="nav__menu" id="navMenu" hidden>
+      <a href="#try">Try it</a>
       <a href="#screens">Screens</a>
       <a href="#details">Details</a>
       <a href="#install">Install</a>
@@ -117,7 +119,7 @@
           </p>
           <div class="actions">
             <a class="btn btn--beam" href="#install">Install Stillsmith</a>
-            <a class="btn btn--quiet" href="https://github.com/CasperOng/Stillsmith">Read the source</a>
+            <a class="btn btn--quiet" href="#try">Try it in the browser</a>
           </div>
           <p class="meta">iOS 17+ · iPhone and iPad · unsigned build</p>
         </div>
@@ -137,7 +139,7 @@
 
       <div class="transport" aria-labelledby="transport-label">
         <p class="transport__label" id="transport-label">
-          The app&rsquo;s transport, here to try. Drag to a moment, then press Mark.
+          A feel for the app&rsquo;s transport. The working tool is below &mdash; drag, mark, extract.
         </p>
         <div class="transport__read">
           <span class="tl">TC</span>
@@ -168,6 +170,128 @@
           </button>
         </div>
         <p class="sr-only" role="status" aria-live="polite" id="markStatus"></p>
+      </div>
+    </section>
+
+    <section class="bench" id="try">
+      <div class="bench__inner">
+        <header class="bench__head">
+          <div>
+            <p class="bench__eyebrow">The workshop</p>
+            <h2>Try it, right here.</h2>
+          </div>
+          <p>
+            The same flow the app uses, running in this browser. Choose a video, mark moments as it
+            plays, then take the stills. Your file never leaves this tab.
+          </p>
+        </header>
+
+        <div class="studio" id="studio">
+          <div class="studio__main">
+            <div class="stage" id="stage">
+              <video id="studioVideo" playsinline preload="none"></video>
+
+              <div class="stage__empty" id="stageEmpty">
+                <svg class="stage__icon" viewBox="0 0 48 48" width="42" height="42" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="5" y="9" width="38" height="30" rx="2" />
+                  <path d="M11 9v30M37 9v30M5 16h6M5 24h6M5 32h6M37 16h6M37 24h6M37 32h6" />
+                  <path d="M20.5 20.5l9.5 3.5-9.5 3.5z" fill="currentColor" stroke="none" opacity=".85" />
+                </svg>
+                <p class="stage__title">Drop a video here</p>
+                <p class="stage__hint">MP4, MOV, WebM — whatever your browser can play. Nothing is uploaded.</p>
+                <div class="stage__actions">
+                  <button class="btn btn--beam" type="button" id="pickVideo">Choose a video</button>
+                  <button class="btn btn--quiet" type="button" id="loadSample">Play the sample reel</button>
+                </div>
+                <input id="videoFile" type="file" accept="video/*" hidden />
+              </div>
+
+              <div class="stage__hud" id="stageHud">
+                <span class="stage__file" id="clipName">No video</span>
+                <span class="stage__meta" id="clipMeta"></span>
+              </div>
+            </div>
+
+            <div class="deck">
+              <div class="deck__read">
+                <span class="tl">TC</span>
+                <output class="tc" id="studioTc" for="studioRail">00:00.00</output>
+                <span class="marks"><b id="studioMarkCount">0</b> marked</span>
+              </div>
+
+              <div class="deck__row">
+                <button class="playbtn" id="playToggle" type="button" aria-label="Play" disabled>
+                  <svg class="playbtn__play" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M6 4.2l9 5.8-9 5.8z" /></svg>
+                  <svg class="playbtn__pause" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M6 4h3v12H6zM11 4h3v12h-3z" /></svg>
+                </button>
+
+                <div
+                  class="rail"
+                  id="studioRail"
+                  role="slider"
+                  tabindex="-1"
+                  aria-label="Scrub the video"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="0"
+                  aria-valuetext="0 seconds"
+                  aria-disabled="true">
+                  <div class="rail__ticks" id="studioTicks" aria-hidden="true"></div>
+                  <div class="rail__marks" id="studioMarks" aria-hidden="true"></div>
+                  <div class="rail__head" id="studioHead" aria-hidden="true"></div>
+                </div>
+
+                <button class="mark" id="studioMark" type="button" disabled>
+                  <svg class="mark__plus" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 13V6.5L8 3l5 3.5V13" /><path d="M8 6v7" /></svg>
+                  <svg class="mark__minus" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 13V6.5L8 3l5 3.5V13" /><path d="M5 9.5h6" /></svg>
+                  <span id="studioMarkLabel">Mark</span>
+                </button>
+              </div>
+
+              <div class="deck__actions">
+                <button class="btn btn--beam deck__extract" id="extractBtn" type="button" disabled>
+                  <span id="extractLabel">Extract frames</span>
+                </button>
+                <button class="deck__ghost" id="removeAll" type="button" disabled>Remove all</button>
+                <button class="deck__ghost" id="changeVideo" type="button">Change video</button>
+                <span class="deck__status" id="studioStatus" role="status" aria-live="polite"></span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="takes" aria-labelledby="takesTitle">
+            <header class="takes__head">
+              <h3 id="takesTitle">Marks</h3>
+              <span class="takes__count" id="takesCount" aria-hidden="true">0</span>
+            </header>
+            <ol class="takes__list" id="takes"></ol>
+            <p class="takes__hint">
+              <kbd>P</kbd> plays and pauses. <kbd>M</kbd> marks; the arrows nudge once the rail has focus.
+            </p>
+            <p class="takes__privacy">The video is read here and never uploaded.</p>
+          </aside>
+        </div>
+
+        <section class="contact" id="contactSheet" aria-labelledby="contactTitle" data-surface="light">
+          <header class="contact__head">
+            <div>
+              <p class="contact__eyebrow">Output</p>
+              <h3 id="contactTitle">Contact sheet</h3>
+            </div>
+            <div class="contact__tools">
+              <span class="contact__count" id="printCount">0 frames</span>
+              <button class="contact__dl" id="downloadAll" type="button" disabled>Download all</button>
+            </div>
+          </header>
+
+          <p class="contact__empty" id="contactEmpty">Marks become stills here, each at the video&rsquo;s own resolution.</p>
+          <ol class="prints" id="prints"></ol>
+        </section>
+
+        <p class="bench__foot">
+          The app keeps going where the browser stops: frames land in Photos, in an album you choose.
+          <a href="#install">Install Stillsmith</a>.
+        </p>
       </div>
     </section>
 

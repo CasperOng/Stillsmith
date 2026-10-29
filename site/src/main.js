@@ -1,3 +1,5 @@
+import './studio.js'
+
 // Stillsmith — the transport demo, copy control and entrance motion.
 
 const DURATION = 180 // seconds in the sample clip
@@ -165,7 +167,7 @@ const navMenu = document.getElementById("navMenu")
 const navToggle = nav?.querySelector(".nav__toggle")
 const navLinks = [...(nav?.querySelectorAll(".nav__links a") ?? [])]
 const lightSections = [...document.querySelectorAll('[data-surface="light"]')]
-const navSections = ["screens", "details", "credit"]
+const navSections = ["try", "screens", "details", "credit"]
   .map((id) => document.getElementById(id))
   .filter(Boolean)
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")

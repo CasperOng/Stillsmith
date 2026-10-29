@@ -20,7 +20,10 @@ npm run build    # → site/dist
 | --- | --- |
 | `index.html` | The page |
 | `src/style.css` | Tokens and the whole visual system |
-| `src/main.js` | The transport demo, copy button, entrance motion |
+| `src/main.js` | The transport demo, nav, copy buttons, entrance motion |
+| `src/studio.js` | The browser workshop: loading, marking, extraction and downloads |
+| `src/zip.js` | A store-only ZIP writer for "Download all" |
+| `public/assets/sample.mp4`, `sample.webm` | The sample reel, encoded as H.264 and VP9 |
 | `public/assets/fonts` | Syne, Space Grotesk and JetBrains Mono, self-hosted (OFL) |
 | `public/assets/screens` | Screenshots captured from the app by the UI tests |
 | `public/assets/signature.svg` | Casper Ong's signature, shared with casperong.is-a.dev |
@@ -35,6 +38,17 @@ They are not hand-taken. `.github/workflows/screenshots.yml` runs
 bundle, and publishes them as the `app-screenshots` artifact (`home`, `settings`,
 `tutorial`). Download that artifact and copy the three PNGs into
 `public/assets/screens/` with those names.
+
+## The browser workshop
+
+`#try` runs the app's flow in the page. A chosen video is read locally with
+`URL.createObjectURL`, marks are kept as seconds, and extraction seeks the video and
+draws each moment to a canvas at the video's own pixel dimensions. Frames download one
+at a time, or as one ZIP built in the page. Nothing is uploaded: the only requests are
+the sample assets and the published source JSON.
+
+The sample reel is an eight-second countdown drawn with the page's fonts, kept as both
+`sample.mp4` (H.264) and `sample.webm` (VP9) so a browser without H.264 still plays it.
 
 ## The source address
 
